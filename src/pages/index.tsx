@@ -1,47 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 
 // components
-import { title } from 'process';
-import { Grid } from '@mui/material';
-import { Container } from '@mui/system';
+import { Container, TextField } from '@mui/material';
 import Layout from '../components/Layout';
 
 // types
-import type { Revista } from '../types/types';
-import RevistaCard from '../components/RevistaCard';
+import type { SingleRevista } from '../types/types';
+import RevistaList from '../components/RevistaList';
 
 type GraphQLResult = {
 	allContentfulRevista: {
-		nodes: Revista[];
+		nodes: SingleRevista[];
 	};
 };
 
 const Home = ({ data, location }: PageProps<GraphQLResult>) => {
 	const posts = data.allContentfulRevista.nodes;
+	const [search, setSearch] = useState('');
+	const [filteredPosts, setFilteredPosts] = useState<SingleRevista[]>(posts);
+
+const handleSearchChange = (event:ChangeEvent<HTMLInputElement>) => {
+	const searchValue = event.target.value;
+	setSearch(searchValue);
+
+	const filtered = searchValue === ''
+	? posts
+	: posts.filter(
+		(item) => item.title.toLowerCase().includes(searchValue.toLowerCase())
+		);
+	setFilteredPosts(filtered);
+};
+
+useEffect(() => {
+
+}, [posts]);
 
 	return (
 		<Layout location={location}>
 			<Container maxWidth='lg'>
-				<Grid container spacing={2}>
-					{posts.map((revista) => {
-				const coverImage = revista.coverImage?.gatsbyImageData.images.fallback.src || '';
-
-				const { title: titleRevista, fecha, slug } = revista;
-				return (
-					<Grid item>
-						<RevistaCard
-							key={slug}
-							title={titleRevista}
-							img={coverImage}
-							subTitle={fecha}
-							slug={slug}
-						/>
-					</Grid>
-);
-			})}
-				</Grid>
+				<TextField
+					id='outlined-basic'
+					label='Buscar...'
+					variant='outlined'
+					value={search}
+					onChange={handleSearchChange}
+					sx={{ my: 2, textAlign: 'center', width: 300 }}
+				/>
+				<RevistaList posts={filteredPosts} />
 			</Container>
 		</Layout>
 	);

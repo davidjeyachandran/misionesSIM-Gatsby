@@ -10,6 +10,7 @@ export type Revista = {
 };
 
 export type SingleRevista = {
+	id: string;
 	author: {
 		name: string;
 	};
