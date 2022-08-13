@@ -21,21 +21,21 @@ const Home = ({ data, location }: PageProps<GraphQLResult>) => {
 	const [search, setSearch] = useState('');
 	const [filteredPosts, setFilteredPosts] = useState<SingleRevista[]>(posts);
 
-const handleSearchChange = (event:ChangeEvent<HTMLInputElement>) => {
-	const searchValue = event.target.value;
-	setSearch(searchValue);
+	const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const searchValue = event.target.value;
+		setSearch(searchValue);
 
-	const filtered = searchValue === ''
-	? posts
-	: posts.filter(
-		(item) => item.title.toLowerCase().includes(searchValue.toLowerCase())
-		);
-	setFilteredPosts(filtered);
-};
+		const filtered = searchValue === ''
+			? posts
+			: posts.filter(
+				(item) => item.title.toLowerCase().includes(searchValue.toLowerCase())
+			);
+		setFilteredPosts(filtered);
+	};
 
-useEffect(() => {
+	useEffect(() => {
 
-}, [posts]);
+	}, [posts]);
 
 	return (
 		<Layout location={location}>
@@ -60,6 +60,7 @@ export const pageQuery = graphql`
 	query HomeQuery {
 		allContentfulRevista(filter: {node_locale: {eq: "en-US"}}, sort: { fields: [fecha], order: DESC }) {
 			nodes {
+				id
 				title
 				slug
 				fecha(formatString: "MMMM Do, YYYY")
