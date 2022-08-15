@@ -19,7 +19,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 		`
 			{
 				allContentfulRevista(filter: {node_locale: {eq: "en-US"}}, sort: { fields: [fecha], order: DESC }) {
-					nodes {
+					nodes 
 						id
 						title
 						slug
