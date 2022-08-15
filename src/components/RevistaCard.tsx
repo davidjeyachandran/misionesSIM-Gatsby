@@ -17,7 +17,7 @@ const RevistaCard = ({ title, subTitle, img, slug }: CardProps) => (
 		<Link to={slug}>
 			<CardMedia
 				component='img'
-				height='260'
+				height='390'
 				image={img}
 				alt={title}
 			/>
@@ -31,6 +31,6 @@ const RevistaCard = ({ title, subTitle, img, slug }: CardProps) => (
 			</CardContent>
 		</Link>
 	</Card>
-	);
+);
 
 export default RevistaCard;
