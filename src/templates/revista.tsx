@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
+import { get } from 'lodash-es';
 
 // components
+import { Button } from '@mui/material';
 import Hero from '../components/Hero';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
@@ -24,6 +26,9 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const post = data.contentfulRevista;
 	const { previous } = data;
 	const { next } = data;
+	const downloadLink = get(post, 'revistaPDF.file.url');
+
+	// console.log(post);
 
 	return (
 		<Layout location={location}>
@@ -40,6 +45,10 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 				</S.Meta>
 
 				<S.Article>
+
+					<a href={downloadLink} style={{ textDecoration: 'none' }}>
+						<Button variant='outlined'>Download Revista</Button>
+					</a>
 					{/* <S.Body dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} /> */}
 
 					{(previous || next) && (
@@ -83,6 +92,11 @@ export const pageQuery = graphql`
 					src
 				}
 			}
+			revistaPDF {
+        file {
+          url
+        }
+      }
 			body {
 				raw
 			}
