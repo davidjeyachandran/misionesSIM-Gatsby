@@ -7,13 +7,23 @@ type GraphQLResult = {
 			slug: string;
 			title: string;
 		}[];
-	};
+	}
+	allContentfulBlogPost: {
+		nodes: {
+			id: string;
+			nid: string;
+			publishDate: string;
+			title: string;
+			slug: string;
+		}[];
+	}
 };
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
 	const { createPage } = actions;
 
 	const revistaTemplate = resolve('./src/templates/revista.tsx');
+	const blogTemplate = resolve('./src/templates/blog.tsx');
 
 	const result = await graphql<GraphQLResult>(
 		`
@@ -24,6 +34,15 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 					title
 					slug
 					fecha(formatString: "MMMM Do, YYYY")
+				}
+			}
+			allContentfulBlogPost(filter: {node_locale: {eq: "en-US"}}, sort: { fields: [publishDate], order: DESC }) {
+				nodes {
+					id
+					nid
+					publishDate(formatString: "MMMM Do, YYYY")
+					title
+					slug
 				}
 			}
 		}
@@ -40,6 +59,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 	}
 
 	const revistas = result.data.allContentfulRevista.nodes;
+	const blogs = result.data.allContentfulBlogPost.nodes;
 
 	if (revistas.length > 0) {
 		revistas.forEach((post, index) => {
@@ -49,6 +69,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			createPage({
 				path: `${post.slug}/`,
 				component: revistaTemplate,
+				context: {
+					slug: post.slug,
+					title: post.title,
+					previousPostSlug,
+					nextPostSlug
+				}
+			});
+		});
+	}
+
+	if (blogs.length > 0) {
+		blogs.forEach((post, index) => {
+			const previousPostSlug = index === 0 ? null : blogs[index - 1].slug;
+			const nextPostSlug = index === blogs.length - 1 ? null : blogs[index + 1].slug;
+
+			createPage({
+				path: `${post.slug}/`,
+				component: blogTemplate,
 				context: {
 					slug: post.slug,
 					title: post.title,

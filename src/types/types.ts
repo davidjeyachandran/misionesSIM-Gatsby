@@ -3,10 +3,39 @@ import type { IGatsbyImageData } from 'gatsby-plugin-image';
 export type Revista = {
 	title: string;
 	slug: string;
-	fecha: string;
+	nid: string;
+	publishDate: string;
 	coverImage: {
 		gatsbyImageData: IGatsbyImageData;
 	};
+};
+
+export type Blog = {
+	title: string;
+	slug: string;
+	postedDate: string;
+	heroImage: {
+		gatsbyImageData: IGatsbyImageData;
+	};
+}
+
+export type SingleBlog = {
+	id: string;
+	body: {
+			childMarkdownRemark: {
+				html: string;
+				timeToRead: number;
+			};
+	};
+	heroImage: {
+		gatsbyImageData: IGatsbyImageData;
+		resize: {
+			src: string;
+		};
+	};
+	publishedDate: string;
+	slug: string;
+	title: string;
 };
 
 export type SingleRevista = {

@@ -3,7 +3,6 @@ import { graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 
 // components
-import ArticlePreview from '../components/ArticlePreview';
 import Hero from '../components/Hero';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
