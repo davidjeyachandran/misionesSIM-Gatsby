@@ -8,11 +8,11 @@ import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 
 // types
-import type { Revista } from '../types/types';
+import type { SingleRevista } from '../types/types';
 
 type GraphQLResult = {
 	allContentfulRevista: {
-		nodes: Revista[];
+		nodes: SingleRevista[];
 	};
 };
 

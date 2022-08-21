@@ -1,31 +1,12 @@
 import type { IGatsbyImageData } from 'gatsby-plugin-image';
 
-export type Revista = {
-	title: string;
-	slug: string;
-	nid: string;
-	publishDate: string;
-	coverImage: {
-		gatsbyImageData: IGatsbyImageData;
-	};
-};
-
-export type Blog = {
-	title: string;
-	slug: string;
-	postedDate: string;
-	heroImage: {
-		gatsbyImageData: IGatsbyImageData;
-	};
-}
-
 export type SingleBlog = {
 	id: string;
 	body: {
-			childMarkdownRemark: {
-				html: string;
-				timeToRead: number;
-			};
+		childMarkdownRemark: {
+			html: string;
+			timeToRead: number;
+		};
 	};
 	heroImage: {
 		gatsbyImageData: IGatsbyImageData;
@@ -33,7 +14,7 @@ export type SingleBlog = {
 			src: string;
 		};
 	};
-	publishedDate: string;
+	publishDate: string;
 	slug: string;
 	title: string;
 };
@@ -44,10 +25,10 @@ export type SingleRevista = {
 		name: string;
 	};
 	body: {
-			childMarkdownRemark: {
-				html: string;
-				timeToRead: number;
-			};
+		childMarkdownRemark: {
+			html: string;
+			timeToRead: number;
+		};
 	};
 	coverImage: {
 		gatsbyImageData: IGatsbyImageData;
