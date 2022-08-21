@@ -8,6 +8,7 @@ export type SingleBlog = {
 			timeToRead: number;
 		};
 	};
+	description: string;
 	heroImage: {
 		gatsbyImageData: IGatsbyImageData;
 		resize: {
