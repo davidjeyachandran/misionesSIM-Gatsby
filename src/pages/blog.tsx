@@ -35,7 +35,6 @@ const BlogList = ({ data, location }: PageProps<GraphQLResult>) => {
 		<Layout location={location}>
 			<Container maxWidth='lg'>
 				<h1>Blogs</h1>
-				<DoneIcon />
 				<Box sx={{ height: 800, width: '100%' }}>
 					<DataGrid
 						rows={posts}
