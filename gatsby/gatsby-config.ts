@@ -35,6 +35,9 @@ export default {
 		description: 'Official Contentful Gatsby Starter'
 	},
 	pathPrefix: '/gatsby-contentful-starter',
+	flags: {
+		PARALLEL_QUERY_RUNNING: false
+	},
 	plugins: [
 		'gatsby-transformer-remark',
 		'gatsby-transformer-sharp',
