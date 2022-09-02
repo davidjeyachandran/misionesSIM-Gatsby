@@ -1,21 +1,13 @@
 import { resolve } from 'path';
 import type { GatsbyNode } from 'gatsby';
+import { SingleBlog, SingleRevista } from '../src/types/types';
 
 type GraphQLResult = {
 	allContentfulRevista: {
-		nodes: {
-			slug: string;
-			title: string;
-		}[];
+		nodes: SingleRevista[];
 	}
 	allContentfulBlogPost: {
-		nodes: {
-			id: string;
-			nid: string;
-			publishDate: string;
-			title: string;
-			slug: string;
-		}[];
+		nodes: SingleBlog[];
 	}
 };
 
@@ -38,9 +30,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			}
 			allContentfulBlogPost(filter: {node_locale: {eq: "en-US"}}, sort: { fields: [publishDate], order: DESC }) {
 				nodes {
-					id
-					nid
-					publishDate(formatString: "MMMM Do, YYYY")
 					title
 					slug
 				}
