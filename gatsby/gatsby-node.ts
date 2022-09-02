@@ -85,7 +85,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			const nextPostSlug = index === blogs.length - 1 ? null : blogs[index + 1].slug;
 
 			createPage({
-				path: `${post.slug}/`,
+				path: `blog/${post.slug}/`,
 				component: blogTemplate,
 				context: {
 					slug: post.slug,
