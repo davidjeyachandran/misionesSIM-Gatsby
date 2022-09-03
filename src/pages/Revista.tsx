@@ -19,7 +19,7 @@ type GraphQLResult = {
 const RevistaIndex = ({ data, location }: PageProps<GraphQLResult>) => {
 	const posts = data.allContentfulRevista.nodes;
 
-	console.log(posts);
+	// console.log(posts);
 
 	return (
 		<Layout location={location}>

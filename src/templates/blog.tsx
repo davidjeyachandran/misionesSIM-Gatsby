@@ -28,7 +28,7 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const { next } = data;
 	const downloadLink = get(post, 'revistaPDF.file.url');
 
-	console.log(post);
+	// console.log(post);
 
 	return (
 		<Layout location={location}>
