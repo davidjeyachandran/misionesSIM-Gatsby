@@ -8,7 +8,14 @@ type RevistaListProps = {
 }
 
 const RevistaList = ({ posts }: RevistaListProps) => (
-	<Grid container spacing={2}>
+	<Grid
+		container
+		spacing={2}
+		bgcolor='#eee'
+		direction='row'
+		alignItems='center'
+		justifyContent='center'
+	>
 		{posts.map((revista: SingleRevista) => {
 			const coverImage = revista.coverImage?.gatsbyImageData.images.fallback.src || '';
 
