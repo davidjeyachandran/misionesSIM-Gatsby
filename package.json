@@ -64,7 +64,6 @@
 		"starter"
 	],
 	"license": "MIT",
-	"main": "n/a",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/contentful/starter-gatsby-blog.git"
