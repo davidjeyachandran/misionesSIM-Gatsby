@@ -35,7 +35,7 @@ const BlogList = ({ data, location }: PageProps<GraphQLResult>) => {
 		width: 450
 	},
 	{ field: 'publishDate', width: 160 },
-	{ field: 'isImg', width: 50 },
+	{ field: 'isImg', headerName: 'img?', width: 50 },
 	{ field: 'slug', width: 350 }
 ];
 
