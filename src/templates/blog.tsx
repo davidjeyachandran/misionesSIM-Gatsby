@@ -1,20 +1,35 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
+import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { Container } from '@mui/material';
+import { BLOCKS, MARKS } from '../constants';
 
 // components
-import { Button } from '@mui/material';
 import Hero from '../components/Hero';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 
-// styled components
-import * as S from './styles';
-import { Container } from '../components/UI/Container';
-
 // types
 import type { NextPrevious, SingleBlog } from '../types/types';
+
+const options = {
+  renderMark: {
+    [MARKS.BOLD]: (text: React.ReactNode) => <strong>{text}</strong>,
+  },
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => <p>{children}</p>,
+    [BLOCKS.EMBEDDED_ASSET]: (node: any) => (
+	<>
+		<h2>Embedded Asset</h2>
+		<pre>
+			<code>{JSON.stringify(node, null, 2)}</code>
+		</pre>
+	</>
+      ),
+  },
+};
 
 type GraphQLResult = {
 	contentfulBlogPost: SingleBlog;
@@ -22,30 +37,28 @@ type GraphQLResult = {
 	previous: NextPrevious;
 };
 
-const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
+const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const post = data.contentfulBlogPost;
-	const { previous } = data;
-	const { next } = data;
-	const downloadLink = get(post, 'revistaPDF.file.url');
-
-	// console.log(post);
+	const { title, body } = post;
+	const img = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet', null);
 
 	return (
 		<Layout location={location}>
 			<Seo title={post.title} />
-
-			<Hero
-				title={post.title}
-			/>
+			<Container maxWidth='sm'>
+				<Hero title={post.title} />
+				<img srcSet={img} alt={title} />
+				{renderRichText(body, options)}
+			</Container>
 		</Layout>
 	);
 };
 
-export default RevistaTemplate;
+export default BlogTemplate;
 
 export const pageQuery = graphql`
-query BlogQuery {
-  contentfulBlogPost {
+query BlogQuery($slug: String!) {
+  contentfulBlogPost(slug: { eq: $slug}) {
     id
     nid
     publishDate
@@ -55,6 +68,9 @@ query BlogQuery {
     body {
       raw
     }
+		heroImage {
+			gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)
+		}
   }
 }
 

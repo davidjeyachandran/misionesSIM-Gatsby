@@ -79,8 +79,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 				context: {
 					slug: post.slug,
 					title: post.title,
-					previousPostSlug,
-					nextPostSlug
+					previous: previousPostSlug,
+					next: nextPostSlug
 				}
 			});
 		});
