@@ -48,7 +48,7 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 			<Container maxWidth='sm'>
 				<Hero title={post.title} />
 				<img srcSet={img} alt={title} />
-				{renderRichText(body, options)}
+				{body && renderRichText(body, options)}
 			</Container>
 		</Layout>
 	);
