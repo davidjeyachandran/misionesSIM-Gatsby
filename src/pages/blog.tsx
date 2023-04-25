@@ -23,7 +23,7 @@ const BlogList = ({ data, location }: PageProps<GraphQLResult>) => {
 				<h1>Blogs</h1>
 				<Grid container>
 					{posts.slice(0, 20).map((item) => {
-						const img = get(item, 'heroImage.gatsbyImageData.images.sources[0].srcSet', null);
+						const img = get(item, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
 						const slug = get(item, 'slug');
 						return <BlogCard key={slug} title={item?.title} img={img} slug={slug} />;
 					})}
