@@ -18,6 +18,12 @@ const Navigation = () => (
 			</S.MenuItem>
 
 			<S.MenuItem>
+				<Link to='/revista' activeClassName='active'>
+					Revistas
+				</Link>
+			</S.MenuItem>
+
+			<S.MenuItem>
 				<Link to='/blog/' activeClassName='active'>
 					Blog
 				</Link>

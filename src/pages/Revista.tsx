@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 
 // components
-import Hero from '../components/Hero';
+import { Container, TextField } from '@mui/material';
 import Layout from '../components/Layout';
-import Seo from '../components/Seo';
 
 // types
 import type { SingleRevista } from '../types/types';
+import RevistaList from '../components/RevistaList';
 
 type GraphQLResult = {
 	allContentfulRevista: {
@@ -18,14 +18,38 @@ type GraphQLResult = {
 
 const RevistaIndex = ({ data, location }: PageProps<GraphQLResult>) => {
 	const posts = data.allContentfulRevista.nodes;
+	const [search, setSearch] = useState('');
+	const [filteredPosts, setFilteredPosts] = useState<SingleRevista[]>(posts);
 
-	// console.log(posts);
+	const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const searchValue = event.target.value;
+		setSearch(searchValue);
+
+		const filtered = searchValue === ''
+			? posts
+			: posts.filter(
+				(item) => item.title.toLowerCase().includes(searchValue.toLowerCase())
+			);
+		setFilteredPosts(filtered);
+	};
+
+	useEffect(() => {
+
+	}, [posts]);
 
 	return (
 		<Layout location={location}>
-			<Seo title='Revista' />
-			<Hero title='Revista' />
-			{/* <ArticlePreview posts={posts} /> */}
+			<Container maxWidth='lg'>
+				<TextField
+					id='outlined-basic'
+					label='Buscar...'
+					variant='outlined'
+					value={search}
+					onChange={handleSearchChange}
+					sx={{ my: 2, textAlign: 'center', width: 300 }}
+				/>
+				<RevistaList posts={filteredPosts} />
+			</Container>
 		</Layout>
 	);
 };
@@ -34,8 +58,9 @@ export default RevistaIndex;
 
 export const pageQuery = graphql`
 	query RevistaIndexQuery {
-		allContentfulRevista(sort: { fields: [fecha], order: DESC }) {
+		allContentfulRevista(filter: {node_locale: {eq: "en-US"}}, sort: { fields: [fecha], order: DESC }) {
 			nodes {
+				id
 				title
 				slug
 				fecha(formatString: "MMMM Do, YYYY")

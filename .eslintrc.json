@@ -89,7 +89,7 @@
 		],
 		"react/jsx-indent": [
 			"warn",
-			"tab"
+			"space"
 		],
 		"react/jsx-no-useless-fragment": "warn",
 		"react/jsx-one-expression-per-line": "off",
