@@ -56,14 +56,14 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 							<ul>
 								{previous && (
 									<li>
-										<Link to={`/${previous.slug}`} rel='prev'>
+										<Link to={`/revistavamos/${previous.slug}`} rel='prev'>
 											← {previous.title}
 										</Link>
 									</li>
 								)}
 								{next && (
 									<li>
-										<Link to={`/${next.slug}`} rel='next'>
+										<Link to={`/revistavamos/${next.slug}`} rel='next'>
 											{next.title} →
 										</Link>
 									</li>

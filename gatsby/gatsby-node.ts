@@ -56,7 +56,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			const nextPostSlug = index === revistas.length - 1 ? null : revistas[index + 1].slug;
 
 			createPage({
-				path: `${post.slug}/`,
+				path: `/revistavamos/${post.slug}/`,
 				component: revistaTemplate,
 				context: {
 					slug: post.slug,
@@ -74,7 +74,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			const nextPostSlug = index === blogs.length - 1 ? null : blogs[index + 1].slug;
 
 			createPage({
-				path: `blog/${post.slug}/`,
+				path: `/blog/${post.slug}/`,
 				component: blogTemplate,
 				context: {
 					slug: post.slug,
