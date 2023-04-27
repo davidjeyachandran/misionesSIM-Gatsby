@@ -1,7 +1,7 @@
 import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 
-export const Hero = styled.div`
+export const HeroStyle = styled.div`
 	align-items: flex-end;
 	display: flex;
 	margin: 0 auto;

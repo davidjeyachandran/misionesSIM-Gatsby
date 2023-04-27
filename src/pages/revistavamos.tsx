@@ -16,7 +16,7 @@ type GraphQLResult = {
 	};
 };
 
-const RevistaIndex = ({ data, location }: PageProps<GraphQLResult>) => {
+const RevistaVamos = ({ data, location }: PageProps<GraphQLResult>) => {
 	const posts = data.allContentfulRevista.nodes;
 	const [search, setSearch] = useState('');
 	const [filteredPosts, setFilteredPosts] = useState<SingleRevista[]>(posts);
@@ -54,7 +54,7 @@ const RevistaIndex = ({ data, location }: PageProps<GraphQLResult>) => {
 	);
 };
 
-export default RevistaIndex;
+export default RevistaVamos;
 
 export const pageQuery = graphql`
 	query RevistaIndexQuery {

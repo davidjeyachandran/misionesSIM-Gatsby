@@ -18,7 +18,7 @@ const Navigation = () => (
 			</S.MenuItem>
 
 			<S.MenuItem>
-				<Link to='/revista' activeClassName='active'>
+				<Link to='/revistavamos' activeClassName='active'>
 					Revistas
 				</Link>
 			</S.MenuItem>

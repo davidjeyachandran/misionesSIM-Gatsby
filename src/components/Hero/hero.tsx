@@ -12,7 +12,7 @@ type HeroProps = {
 };
 
 const Hero = ({ content, image, title }: HeroProps) => (
-	<S.Hero>
+	<S.HeroStyle>
 		{image ? <S.Image alt={title} image={image} /> : null}
 
 		<S.Details>
@@ -20,7 +20,7 @@ const Hero = ({ content, image, title }: HeroProps) => (
 
 			{content ? <S.Content>{content}</S.Content> : null}
 		</S.Details>
-	</S.Hero>
+	</S.HeroStyle>
 );
 
 export default Hero;
