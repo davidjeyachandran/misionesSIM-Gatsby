@@ -20,18 +20,9 @@ export const Article = styled.article`
 	line-height: 1.75;
 	padding: 24px 24px calc(24px * 2);
 
-	h2:first-of-type {
-		margin-top: 0;
-	}
 
 	a {
-		border-bottom: 1.5px solid currentColor;
 		font-weight: 500;
-
-		&:hover {
-			border-bottom-color: transparent;
-			color: #4a90e2;
-		}
 	}
 
 	p {

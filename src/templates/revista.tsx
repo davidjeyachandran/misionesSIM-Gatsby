@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 
 // components
-import { Button } from '@mui/material';
+import { Box, Button, Grid, Modal, Typography } from '@mui/material';
 import Hero from '../components/Hero';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
@@ -22,13 +22,32 @@ type GraphQLResult = {
 	previous: NextPrevious;
 };
 
+const styleModal = {
+	position: 'absolute' as 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	margin: '0 auto',
+	width: '90%',
+	height: '90%',
+	bgcolor: 'background.paper',
+	border: '1px solid #000',
+	boxShadow: 24,
+	p: 4,
+	textAlign: 'center'
+};
+
 const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const post = data.contentfulRevista;
 	const { previous } = data;
 	const { next } = data;
+	const [open, setOpen] = useState(false);
 	const downloadLink = get(post, 'revistaPDF.file.url');
 
-	// console.log(post);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
+	console.log(post);
 
 	return (
 		<Layout location={location}>
@@ -50,6 +69,7 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 						<Button variant='outlined'>Download Revista</Button>
 					</a>
 					{/* <S.Body dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} /> */}
+					<Button onClick={handleOpen}>Leer Revista online</Button>
 
 					{(previous || next) && (
 						<S.Navigation>
@@ -72,6 +92,21 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 						</S.Navigation>
 					)}
 				</S.Article>
+
+
+				<Modal
+					open={open}
+					onClose={handleClose}
+					aria-labelledby="modal-modal-title"
+					aria-describedby="modal-modal-description"
+				>
+					<Box sx={styleModal}>
+
+						<iframe src="https://indd.adobe.com/embed/ff3abaaa-c33d-4acd-a57d-396bbc250aed?startpage=1&allowFullscreen=true" width="100%" height="90%" allowFullScreen></iframe>
+						<Button sx={{ margin: '0 auto', textAlign: 'center' }} onClick={handleClose}>Cerrar</Button>
+
+					</Box>
+				</Modal>
 			</Container>
 		</Layout>
 	);
@@ -92,11 +127,12 @@ export const pageQuery = graphql`
 					src
 				}
 			}
+			inDesignID
 			revistaPDF {
-        file {
-          url
-        }
-      }
+				file {
+				url
+				}
+			}
 			body {
 				raw
 			}
