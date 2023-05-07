@@ -27,7 +27,7 @@ const CardContentCustom = styled(CardContent)(`
 
 const RevistaCard = ({ title, subTitle, img, slug }: CardProps) => (
 	<CardCustom sx={{ width: 275 }}>
-		<Link to={slug}>
+		<Link to={`/revistavamos/${slug}`}>
 			<CardMedia
 				component='img'
 				height='390'
