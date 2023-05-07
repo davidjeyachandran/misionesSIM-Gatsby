@@ -115,7 +115,7 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 export default RevistaTemplate;
 
 export const pageQuery = graphql`
-	query BlogPostBySlug($slug: String!, $previousPostSlug: String, $nextPostSlug: String) {
+	query RevistaBySlug($slug: String!, $previousPostSlug: String, $nextPostSlug: String) {
 		contentfulRevista(slug: { eq: $slug }) {
 			slug
 			title

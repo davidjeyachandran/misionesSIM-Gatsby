@@ -50,7 +50,6 @@ export const pageQuery = graphql`
 				heroImage {
 					gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)
 				}
-
 			}
 		}
 	}

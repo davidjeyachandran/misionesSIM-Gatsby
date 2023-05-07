@@ -18,6 +18,7 @@ export type SingleBlog = {
 	publishDate: string;
 	slug: string;
 	title: string;
+	revista: SingleRevista;
 };
 
 export type SingleRevista = {

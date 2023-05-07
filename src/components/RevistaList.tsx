@@ -17,7 +17,7 @@ const RevistaList = ({ posts }: RevistaListProps) => (
 		justifyContent='center'
 	>
 		{posts.map((revista: SingleRevista) => {
-			const coverImage = revista.coverImage?.gatsbyImageData.images.fallback.src || '';
+			const coverImage = revista.coverImage?.gatsbyImageData.images.fallback?.src || '';
 
 			const { id, title: titleRevista, fecha, slug } = revista;
 			return (
