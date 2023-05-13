@@ -38,6 +38,7 @@ export type SingleRevista = {
 			src: string;
 		};
 	};
+	inDesignID: string | null;
 	fecha: string;
 	rawDate: string;
 	slug: string;

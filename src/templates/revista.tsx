@@ -47,20 +47,21 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
+	const { title, coverImage, fecha, rawDate, inDesignID } = post;
 	console.log(post);
 
 	return (
 		<Layout location={location}>
-			<Seo title={post.title} />
+			<Seo title={title} />
 
 			<Hero
-				image={post.coverImage?.gatsbyImageData}
-				title={post.title}
+				image={coverImage?.gatsbyImageData}
+				title={title}
 			/>
 
 			<Container>
 				<S.Meta>
-					<time dateTime={post.rawDate}>{post.fecha}</time>
+					<time dateTime={rawDate}>{fecha}</time>
 				</S.Meta>
 
 				<S.Article>
@@ -69,7 +70,7 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 						<Button variant='outlined'>Download Revista</Button>
 					</a>
 					{/* <S.Body dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} /> */}
-					<Button onClick={handleOpen}>Leer Revista online</Button>
+					{inDesignID ? (<Button onClick={handleOpen}>Leer Revista online</Button>) : ''}
 
 					{(previous || next) && (
 						<S.Navigation>
@@ -93,7 +94,6 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 					)}
 				</S.Article>
 
-
 				<Modal
 					open={open}
 					onClose={handleClose}
@@ -101,12 +101,11 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 					aria-describedby="modal-modal-description"
 				>
 					<Box sx={styleModal}>
-
-						<iframe src="https://indd.adobe.com/embed/ff3abaaa-c33d-4acd-a57d-396bbc250aed?startpage=1&allowFullscreen=true" width="100%" height="90%" allowFullScreen></iframe>
+						{inDesignID && <iframe src={inDesignID} width="100%" height="90%" allowFullScreen></iframe>}
 						<Button sx={{ margin: '0 auto', textAlign: 'center' }} onClick={handleClose}>Cerrar</Button>
-
 					</Box>
 				</Modal>
+
 			</Container>
 		</Layout>
 	);
