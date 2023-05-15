@@ -54,11 +54,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 		revistas.forEach((post, index) => {
 			const previousPostSlug = index === 0 ? null : revistas[index - 1].slug;
 			const nextPostSlug = index === revistas.length - 1 ? null : revistas[index + 1].slug;
-
+			
 			createPage({
 				path: `/revistavamos/${post.slug}/`,
 				component: revistaTemplate,
 				context: {
+					id: post.id,
 					slug: post.slug,
 					title: post.title,
 					previousPostSlug,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, graphql } from 'gatsby';
+import { Link, graphql, useStaticQuery } from 'gatsby';
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 
@@ -14,12 +14,16 @@ import * as S from './styles';
 import { Container } from '../components/UI/Container';
 
 // types
-import type { NextPrevious, SingleRevista } from '../types/types';
+import type { NextPrevious, SingleBlog, SingleRevista } from '../types/types';
+import RelatedBlogs from '../components/RelatedBlogs';
 
 type GraphQLResult = {
 	contentfulRevista: SingleRevista;
 	next: NextPrevious;
 	previous: NextPrevious;
+	allContentfulBlogPost: {
+		nodes: SingleBlog[];
+	}
 };
 
 const styleModal = {
@@ -38,7 +42,9 @@ const styleModal = {
 };
 
 const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
+	const blogPosts = data.allContentfulBlogPost.nodes;
 	const post = data.contentfulRevista;
+	// const blogs = 
 	const { previous } = data;
 	const { next } = data;
 	const [open, setOpen] = useState(false);
@@ -47,8 +53,9 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const { title, coverImage, fecha, rawDate, inDesignID } = post;
-	console.log(post);
+	const { id, title, coverImage, fecha, rawDate, inDesignID } = post;
+
+	console.log(data, location);
 
 	return (
 		<Layout location={location}>
@@ -107,6 +114,7 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 				</Modal>
 
 			</Container>
+			<RelatedBlogs blogPosts={blogPosts} />
 		</Layout>
 	);
 };
@@ -114,8 +122,9 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 export default RevistaTemplate;
 
 export const pageQuery = graphql`
-	query RevistaBySlug($slug: String!, $previousPostSlug: String, $nextPostSlug: String) {
+	query RevistaBySlug($slug: String!, $id:String!, $previousPostSlug: String, $nextPostSlug: String) {
 		contentfulRevista(slug: { eq: $slug }) {
+			id
 			slug
 			title
 			fecha(formatString: "MMMM Do, YYYY")
@@ -144,5 +153,13 @@ export const pageQuery = graphql`
 			slug
 			title
 		}
+		allContentfulBlogPost(filter: { revista: { id: { eq: $id } } }) {
+			nodes {
+			id
+			slug
+			title
+			createdAt
+        	}
+      	}
 	}
 `;
