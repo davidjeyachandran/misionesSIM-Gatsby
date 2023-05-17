@@ -11,7 +11,7 @@ type CardProps = {
 
 const BlogCard = ({ title, img, slug }: CardProps) => (
 	<Grid item md={6}>
-		<Link to={slug}>
+		<Link to={`/blog/${slug}`}>
 			<Box height='345px' sx={{ overflow: 'hidden' }}>
 				<img
 					srcSet={img}

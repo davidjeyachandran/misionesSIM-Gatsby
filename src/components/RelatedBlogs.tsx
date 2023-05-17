@@ -1,6 +1,8 @@
 import React from 'react';
 import { useStaticQuery, graphql, StaticQuery } from "gatsby";
 import { SingleBlog } from '../types/types';
+import BlogCard from './BlogCard';
+import { get } from 'lodash-es';
 
 interface BlogPost {
   id: string;
@@ -20,13 +22,12 @@ interface RelatedBlogsProps {
 }
 
 const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ blogPosts }) => {
-  console.log(blogPosts);
-
   return (<>
     <p>Blog Posts</p>
-    {blogPosts.map((blogPost) => (
-      <p>{blogPost.title}</p>
-    ))}
+    {blogPosts.map((blog) => {
+      const img = get(blog, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
+      return <BlogCard key={blog.slug} title={blog?.title} img={img} slug={blog.slug} />;
+    })}
   </>
   )
 };

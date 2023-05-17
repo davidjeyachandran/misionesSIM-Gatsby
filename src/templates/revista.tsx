@@ -113,8 +113,8 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 					</Box>
 				</Modal>
 
+				<RelatedBlogs blogPosts={blogPosts} />
 			</Container>
-			<RelatedBlogs blogPosts={blogPosts} />
 		</Layout>
 	);
 };
@@ -159,6 +159,10 @@ export const pageQuery = graphql`
 			slug
 			title
 			createdAt
+			publishDate(formatString: "MMMM Do, YYYY")
+			heroImage {
+					gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)
+				}
         	}
       	}
 	}
