@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, StaticQuery } from "gatsby";
 import { SingleBlog } from '../types/types';
 import BlogCard from './BlogCard';
 import { get } from 'lodash-es';
+import { Grid } from '@mui/material';
 
 interface BlogPost {
   id: string;
@@ -23,11 +24,13 @@ interface RelatedBlogsProps {
 
 const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ blogPosts }) => {
   return (<>
-    <p>Blog Posts</p>
-    {blogPosts.map((blog) => {
-      const img = get(blog, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
-      return <BlogCard key={blog.slug} title={blog?.title} img={img} slug={blog.slug} />;
-    })}
+    <h2>Blog Relacionada</h2>
+    <Grid container>
+      {blogPosts.map((blog) => {
+        const img = get(blog, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
+        return <BlogCard key={blog.slug} title={blog?.title} img={img} slug={blog.slug} description={blog?.description} />;
+      })}
+    </Grid>
   </>
   )
 };

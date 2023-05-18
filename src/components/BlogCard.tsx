@@ -1,30 +1,37 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { Link } from 'gatsby';
-import { Box, Grid } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, CardMedia, Grid } from '@mui/material';
 
 type CardProps = {
 	title: string;
 	img: string;
 	slug: string
+	description: string;
 }
 
-const BlogCard = ({ title, img, slug }: CardProps) => (
-	<Grid item md={6}>
-		<Link to={`/blog/${slug}`}>
-			<Box height='345px' sx={{ overflow: 'hidden' }}>
-				<img
-					srcSet={img}
-					alt={title}
-				/>
-			</Box>
+const BlogCard = ({ title, img, slug, description }: CardProps) => (
 
-			<Typography gutterBottom variant='h6' component='div' sx={{ minHeight: 40, lineHeight: 1.2 }}>
-				{title}
-			</Typography>
+	<Link to={`/blog/${slug}`}>
+		<Card sx={{ maxWidth: 345, m: 2 }}>
+			<CardHeader
+				title={title}
+				subheader="September 14, 2016"
+			/>
+			<CardMedia
+				component="img"
+				height="194"
+				srcSet={img}
+				alt={title}
+			/>
+			<CardContent>
+				<Typography variant="body2" color="text.secondary">
+					{description}
+				</Typography>
+			</CardContent>
+		</Card>
+	</Link>
 
-		</Link>
-	</Grid>
 );
 
 export default BlogCard;

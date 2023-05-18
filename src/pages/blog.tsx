@@ -22,10 +22,11 @@ const BlogList = ({ data, location }: PageProps<GraphQLResult>) => {
 			<Container maxWidth='lg'>
 				<h1>Blogs</h1>
 				<Grid container>
-					{posts.slice(0, 20).map((item) => {
-						const img = get(item, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
-						const slug = get(item, 'slug');
-						return <BlogCard key={slug} title={item?.title} img={img} slug={slug} />;
+					{posts.slice(0, 40).map((blog) => {
+						const description = get(blog, 'description.description', '').slice(0, 150)
+						const img = get(blog, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
+						const slug = get(blog, 'slug');
+						return <BlogCard key={slug} title={blog?.title} img={img} slug={slug} description={description} />;
 					})}
 
 				</Grid>
@@ -47,6 +48,9 @@ export const pageQuery = graphql`
 				title
 				slug
 				publishDate(formatString: "MMMM Do, YYYY")
+				description {
+					description
+					}
 				heroImage {
 					gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)
 				}
