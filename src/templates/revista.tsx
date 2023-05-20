@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import { Link, graphql, useStaticQuery } from 'gatsby';
+import { Link, graphql } from 'gatsby';
+import { GatsbyImage } from "gatsby-plugin-image"
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 
 // components
-import { Box, Button, Grid, Modal, Typography } from '@mui/material';
-import Hero from '../components/Hero';
+import { Container, Box, Button, Modal } from '@mui/material';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 
-// styled components
-import * as S from './styles';
-import { Container } from '../components/UI/Container';
 
 // types
 import type { NextPrevious, SingleBlog, SingleRevista } from '../types/types';
@@ -60,46 +57,39 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	return (
 		<Layout location={location}>
 			<Seo title={title} />
-
-			<Hero
-				image={coverImage?.gatsbyImageData}
-				title={title}
-			/>
-
+			<GatsbyImage style={{ maxHeight: 300 }} image={coverImage?.gatsbyImageData} alt={title} />
 			<Container>
-				<S.Meta>
-					<time dateTime={rawDate}>{fecha}</time>
-				</S.Meta>
+				<h1>{title}</h1>
+				<time dateTime={rawDate}>{fecha}</time>
+				<br />
+				<a href={downloadLink} style={{ textDecoration: 'none' }}>
+					<Button variant='outlined'>Download Revista</Button>
+				</a>
+				<br />
+				{/* <S.Body dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} /> */}
+				{inDesignID ? (<Button variant='outlined' onClick={handleOpen}>Leer Revista online</Button>) : ''}
 
-				<S.Article>
+				{(previous || next) && (
 
-					<a href={downloadLink} style={{ textDecoration: 'none' }}>
-						<Button variant='outlined'>Download Revista</Button>
-					</a>
-					{/* <S.Body dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} /> */}
-					{inDesignID ? (<Button onClick={handleOpen}>Leer Revista online</Button>) : ''}
+					<ul>
+						{previous && (
+							<li>
+								<Link to={`/revistavamos/${previous.slug}`} rel='prev'>
+									← {previous.title}
+								</Link>
+							</li>
+						)}
+						{next && (
+							<li>
+								<Link to={`/revistavamos/${next.slug}`} rel='next'>
+									{next.title} →
+								</Link>
+							</li>
+						)}
+					</ul>
 
-					{(previous || next) && (
-						<S.Navigation>
-							<ul>
-								{previous && (
-									<li>
-										<Link to={`/revistavamos/${previous.slug}`} rel='prev'>
-											← {previous.title}
-										</Link>
-									</li>
-								)}
-								{next && (
-									<li>
-										<Link to={`/revistavamos/${next.slug}`} rel='next'>
-											{next.title} →
-										</Link>
-									</li>
-								)}
-							</ul>
-						</S.Navigation>
-					)}
-				</S.Article>
+				)}
+
 
 				<Modal
 					open={open}
@@ -159,6 +149,9 @@ export const pageQuery = graphql`
 			slug
 			title
 			createdAt
+			description {
+				description
+			}
 			publishDate(formatString: "MMMM Do, YYYY")
 			heroImage {
 					gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)

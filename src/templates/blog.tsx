@@ -50,7 +50,7 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 				<Grid container>
 					<Grid item md={8}>
 						<Hero title={post.title} />
-						<img srcSet={img} alt={title} />
+						<img width='100%' srcSet={img} alt={title} />
 						{body && renderRichText(body, options)}
 					</Grid>
 					<Grid container justifyContent="center" md={4}>
