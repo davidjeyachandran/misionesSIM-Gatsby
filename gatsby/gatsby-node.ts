@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import type { GatsbyNode } from 'gatsby';
-import { SingleBlog, SingleRevista } from '../src/types/types';
+import { SingleBlog, SingleRegion, SingleRevista } from '../src/types/types';
 
 type GraphQLResult = {
 	allContentfulRevista: {
@@ -9,6 +9,9 @@ type GraphQLResult = {
 	allContentfulBlogPost: {
 		nodes: SingleBlog[];
 	}
+	allContentfulRegion: {
+		nodes: SingleRegion[];
+	}
 };
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
@@ -16,6 +19,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
 	const revistaTemplate = resolve('./src/templates/revista.tsx');
 	const blogTemplate = resolve('./src/templates/blog.tsx');
+	const regionTemplate = resolve('./src/templates/region.tsx'); 
 
 	const result = await graphql<GraphQLResult>(
 		`
@@ -34,6 +38,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 					slug
 				}
 			}
+			allContentfulRegion {
+				nodes {
+				  title
+				  slug
+				}
+			  }
 		}
 		`
 	);
@@ -49,6 +59,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
 	const revistas = result.data.allContentfulRevista.nodes;
 	const blogs = result.data.allContentfulBlogPost.nodes;
+	const regions = result.data.allContentfulRegion.nodes;
 
 	if (revistas.length > 0) {
 		revistas.forEach((post, index) => {
@@ -77,6 +88,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			createPage({
 				path: `/blog/${post.slug}/`,
 				component: blogTemplate,
+				context: {
+					slug: post.slug,
+					title: post.title,
+					previous: previousPostSlug,
+					next: nextPostSlug
+				}
+			});
+		});
+	}
+
+	if (regions.length > 0) {
+		regions.forEach((post, index) => {
+			const previousPostSlug = index === 0 ? null : regions[index - 1].slug;
+			const nextPostSlug = index === regions.length - 1 ? null : regions[index + 1].slug;
+
+			createPage({
+				path: `/regiones/${post.slug}/`,
+				component: regionTemplate,
 				context: {
 					slug: post.slug,
 					title: post.title,

@@ -48,3 +48,27 @@ export type SingleRevista = {
 };
 
 export type NextPrevious = { slug: string; title: string } | null;
+
+export type SingleRegion = {
+	id: string;
+	slug: string;
+	title: string;
+	body: {
+		childMarkdownRemark: {
+			html: string;
+			timeToRead: number;
+		};
+	};
+	heroImage: {
+		gatsbyImageData: IGatsbyImageData;
+		resize: {
+			src: string;
+		};
+	};
+	map: {
+		gatsbyImageData: IGatsbyImageData;
+		resize: {
+			src: string;
+		};
+	};
+};
