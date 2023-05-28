@@ -41,7 +41,8 @@ type GraphQLResult = {
 const RegionTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
   const post = data.contentfulRegion;
   const { title, body, map } = post;
-  const img = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
+  const imgHero = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
+  const imgMap = get(post, 'map.gatsbyImageData.images.sources[0].srcSet');
 
   console.log(post);
 
@@ -52,7 +53,8 @@ const RegionTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
         <Grid container>
           <Grid item md={8}>
             <Hero title={post.title} />
-            <img width='100%' srcSet={img} alt={title} />
+            <img width='100%' srcSet={imgHero} alt={title} />
+            <img srcSet={imgMap} alt={title} />
           </Grid>
         </Grid>
       </Container>
