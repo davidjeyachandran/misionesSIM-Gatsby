@@ -31,8 +31,8 @@ if (!spaceId || !accessToken) {
 
 export default {
 	siteMetadata: {
-		title: 'Gatsby Contentful Starter',
-		description: 'Official Contentful Gatsby Starter'
+		title: 'Missions Interlink',
+		description: 'Linking, equipping, serving, inspiring, and representing mission organisations and churches across Australia'
 	},
 	pathPrefix: '/gatsby-contentful-starter',
 	flags: {
