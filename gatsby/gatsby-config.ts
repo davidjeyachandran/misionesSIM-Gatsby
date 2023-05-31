@@ -31,8 +31,8 @@ if (!spaceId || !accessToken) {
 
 export default {
 	siteMetadata: {
-		title: 'Missions Interlink',
-		description: 'Linking, equipping, serving, inspiring, and representing mission organisations and churches across Australia'
+		title: 'MisionesSIM',
+		description: 'Sociedad Internacional Misionera',
 	},
 	pathPrefix: '/gatsby-contentful-starter',
 	flags: {
