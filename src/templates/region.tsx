@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { Box, Container, Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { BLOCKS, MARKS } from '../constants';
 
 // components
@@ -13,7 +13,6 @@ import Seo from '../components/Seo';
 
 // types
 import type { NextPrevious, SingleRegion } from '../types/types';
-import RevistaCard from '../components/RevistaCard';
 
 const options = {
   renderMark: {
@@ -40,11 +39,16 @@ type GraphQLResult = {
 
 const RegionTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
   const post = data.contentfulRegion;
-  const { title, body, map } = post;
+  const { title, body } = post;
   const imgHero = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
   const imgMap = get(post, 'map.gatsbyImageData.images.sources[0].srcSet');
 
   console.log(post);
+
+  const richTextData = {
+    raw: body.raw,
+    references: [],
+  };
 
   return (
     <Layout location={location}>
@@ -54,6 +58,7 @@ const RegionTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
           <Grid item md={8}>
             <Hero title={post.title} />
             <img width='100%' srcSet={imgHero} alt={title} />
+            {body && renderRichText(richTextData, options)}
             <img srcSet={imgMap} alt={title} />
           </Grid>
         </Grid>
@@ -76,7 +81,7 @@ query BlogQuery($slug: String!) {
 		gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)
       }
       body {
-		raw
+		    raw
       }
       slug
     }
