@@ -54,6 +54,7 @@ export type SingleRegion = {
 	slug: string;
 	title: string;
 	body: {
+    	raw: any;
 		childMarkdownRemark: {
 			html: string;
 			timeToRead: number;

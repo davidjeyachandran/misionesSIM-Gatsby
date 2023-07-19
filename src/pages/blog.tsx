@@ -26,7 +26,7 @@ const BlogList = ({ data, location }: PageProps<GraphQLResult>) => {
 						const description = get(blog, 'description.description', '').slice(0, 150)
 						const img = get(blog, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
 						const slug = get(blog, 'slug');
-						return <BlogCard key={slug} title={blog?.title} img={img} slug={slug} description={description} />;
+						return <BlogCard key={slug} title={blog?.title} date={blog.publishDate} img={img} slug={slug} description={description} />;
 					})}
 
 				</Grid>

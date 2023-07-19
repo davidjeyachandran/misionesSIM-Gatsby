@@ -5,18 +5,19 @@ import { Box, Card, CardContent, CardHeader, CardMedia, Grid } from '@mui/materi
 
 type CardProps = {
 	title: string;
+	date: string
 	img: string;
 	slug: string
 	description: string;
 }
 
-const BlogCard = ({ title, img, slug, description }: CardProps) => (
+const BlogCard = ({ title, date, img, slug, description }: CardProps) => (
 
 	<Link to={`/blog/${slug}`}>
 		<Card sx={{ maxWidth: 345, m: 2 }}>
 			<CardHeader
 				title={title}
-				subheader="September 14, 2016"
+				subheader={date}
 			/>
 			<CardMedia
 				component="img"
