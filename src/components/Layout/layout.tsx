@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 import type { WindowLocation } from '@reach/router';
 
 // components
-import Footer from '../Footer';
+import Footer from '../Footer/Footer';
 import Navigation from '../Navigation';
 import Seo from '../Seo';
 
