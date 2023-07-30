@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo-reversed.png'
-import { Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faFacebook,
@@ -10,17 +10,10 @@ import {
 	faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons'
 
+const year = new Date().getFullYear();
+
 const Footer = () => (
 	<Container maxWidth={false} sx={{ backgroundColor: 'black' }}>
-		<Grid container >
-			<Grid item xs={12} sm={6} height='100' sx={{ backgroundColor: 'yellow' }}>
-
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus, dolorum! Fugiat dicta magnam tempore est eos quo quaerat enim eaque ex porro culpa, cumque sint, obcaecati suscipit earum nulla. Saepe?
-			</Grid>
-			<Grid item xs={12} sm={6} height='100' sx={{ backgroundColor: 'lime' }}>
-				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus sit, inventore sunt a ullam provident quod adipisci quibusdam? Doloremque, repellat soluta odit fugiat temporibus voluptate explicabo? Voluptatum iusto aspernatur cumque.
-			</Grid>
-		</Grid>
 		<Grid container sx={{ color: 'white', fontSize: '1em' }}>
 			<Grid item xs={12} sm={6} >
 				<img src={logo} />
@@ -29,18 +22,23 @@ const Footer = () => (
 				<p>Trabajamos en conjunto con las iglesias para cumplir la misión de Dios entre culturas tanto local como globalmente.</p>
 				<p>Facilitamos la participación en ministerios transculturales de aquellos a quien Dios está llamando.</p>
 			</Grid>
-			<Grid item xs={12} sm={6}>
-				<FontAwesomeIcon icon={faFacebook} size="2x" />
-				<FontAwesomeIcon icon={faInstagram} size="2x" />
-				<FontAwesomeIcon icon={faYoutube} size="2x" />
-				<FontAwesomeIcon icon={faLinkedin} size="2x" />
-				<FontAwesomeIcon icon={faWhatsapp} size="2x" />
-
-				¿Tienes alguna pregunta? Escríbenos a sim.preguntas@gmail.com
-
+			<Grid item xs={12} sm={6} textAlign='right'>
+				<Box display="flex" width='100%' justifyContent="flex-end">
+					<Box display="flex" width="240px" justifyContent="space-between">
+						<FontAwesomeIcon icon={faFacebook} size="2x" />
+						<FontAwesomeIcon icon={faInstagram} size="2x" />
+						<FontAwesomeIcon icon={faYoutube} size="2x" />
+						<FontAwesomeIcon icon={faLinkedin} size="2x" />
+						<FontAwesomeIcon icon={faWhatsapp} size="2x" />
+					</Box>
+				</Box>
+				<p>¿Tienes alguna pregunta? Escríbenos a sim.preguntas@gmail.com</p>
+				<p>Escríbenos a sim.preguntas@gmail.com</p>
+				<p>Copyright ©<span>{new Date().getFullYear()}</span> SIM Latinoamérica</p>
+				<p>Todos Derechos Reservados</p>
 			</Grid>
 		</Grid>
-	</Container>
+	</Container >
 );
 
 export default Footer;
