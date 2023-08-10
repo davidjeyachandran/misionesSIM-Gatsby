@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import logo from '../../assets/logo.png';
 
 // styled components
 import * as S from './styles';
@@ -7,7 +8,7 @@ import * as S from './styles';
 const Navigation = () => (
 	<S.Nav role='navigation' aria-label='Main'>
 		<S.LogoLink to='/'>
-			<span>MisionesSIM</span>
+			<img width={120} src={logo} />
 		</S.LogoLink>
 
 		<S.MenuList>

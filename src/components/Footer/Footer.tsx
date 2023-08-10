@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo-reversed.png'
+import logo from '../../assets/logo.png';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -13,10 +13,10 @@ import {
 const year = new Date().getFullYear();
 
 const Footer = () => (
-	<Container maxWidth={false} sx={{ backgroundColor: 'black' }}>
+	<Container maxWidth={false} sx={{ backgroundColor: 'black', py: 6 }}>
 		<Grid container sx={{ color: 'white', fontSize: '1em' }}>
 			<Grid item xs={12} sm={6} >
-				<img src={logo} />
+				<img width={100} src={logo} />
 				<p>Cruzamos barreras para proclamar al Cristo crucificado y resucitado, expresando Su amor y compasión entre aquellos que viven y mueren sin Él.</p>
 				<p>Hacemos discípulos que confían y obedecen a Jesús, y llegan a integrarse a iglesias Cristo céntricas.</p>
 				<p>Trabajamos en conjunto con las iglesias para cumplir la misión de Dios entre culturas tanto local como globalmente.</p>
