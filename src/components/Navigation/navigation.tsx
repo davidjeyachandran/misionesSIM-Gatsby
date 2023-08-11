@@ -69,11 +69,13 @@ const Navigation = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ pt: 1 }}>
+          <Box sx={{ pt: 1, flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
             <Link to='/'>
               <img width={100} src={logo} />
             </Link>
           </Box>
+
+
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Link key={item.title} to={item.link}>
@@ -105,7 +107,7 @@ const Navigation = () => {
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
       </Box>
-    </Box>
+    </Box >
   );
 }
 
