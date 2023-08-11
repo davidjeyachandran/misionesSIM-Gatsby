@@ -14,7 +14,6 @@ import Seo from '../Seo';
 import GlobalStyle from '../../styles/GlobalStyle';
 import theme from '../../styles/theme';
 
-// props
 type LayoutProps = {
 	children: ReactNode;
 	location: WindowLocation;
