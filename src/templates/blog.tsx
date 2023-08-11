@@ -43,6 +43,7 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const { title, body, revista } = post;
 	const img = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
 	const revistaImg = get(revista, 'coverImage.gatsbyImageData.images.fallback.src', '')
+
 	return (
 		<Layout location={location}>
 			<Seo title={post.title} />
@@ -53,18 +54,20 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 						<img width='100%' srcSet={img} alt={title} />
 						{body && renderRichText(body, options)}
 					</Grid>
-					<Grid container justifyContent="center" md={4}>
-						<Box sx={{ flexDirection: 'column' }}>
-							<h2>Revista relacionada</h2><br />
-							{revista && (
-								<RevistaCard
-									title={revista.title}
-									subTitle={revista.fecha}
-									img={revistaImg}
-									slug={revista.slug}
-								/>
-							)}
-						</Box>
+					<Grid md={4} item>
+						<Grid container justifyContent="center">
+							<Box sx={{ flexDirection: 'column' }}>
+								<h2>Revista relacionada</h2><br />
+								{revista && (
+									<RevistaCard
+										title={revista.title}
+										subTitle={revista.fecha}
+										img={revistaImg}
+										slug={revista.slug}
+									/>
+								)}
+							</Box>
+						</Grid>
 					</Grid>
 				</Grid>
 			</Container>

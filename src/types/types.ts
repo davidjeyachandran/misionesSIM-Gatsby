@@ -1,13 +1,9 @@
 import type { IGatsbyImageData } from 'gatsby-plugin-image';
+import { ContentfulRichTextGatsbyReference, RenderRichTextData } from 'gatsby-source-contentful/rich-text';
 
 export type SingleBlog = {
 	id: string;
-	body: {
-		childMarkdownRemark: {
-			html: string;
-			timeToRead: number;
-		};
-	};
+	body: RenderRichTextData<ContentfulRichTextGatsbyReference>;
 	description: {
 		description: string;
 	}
@@ -28,12 +24,7 @@ export type SingleRevista = {
 	author: {
 		name: string;
 	};
-	body: {
-		childMarkdownRemark: {
-			html: string;
-			timeToRead: number;
-		};
-	};
+	body: RenderRichTextData<ContentfulRichTextGatsbyReference>;
 	coverImage: {
 		gatsbyImageData: IGatsbyImageData;
 		resize: {
@@ -53,13 +44,7 @@ export type SingleRegion = {
 	id: string;
 	slug: string;
 	title: string;
-	body: {
-    	raw: any;
-		childMarkdownRemark: {
-			html: string;
-			timeToRead: number;
-		};
-	};
+	body: RenderRichTextData<ContentfulRichTextGatsbyReference>;
 	heroImage: {
 		gatsbyImageData: IGatsbyImageData;
 		resize: {
