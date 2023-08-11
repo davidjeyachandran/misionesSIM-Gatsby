@@ -3,6 +3,7 @@ import type { IGatsbyImageData } from 'gatsby-plugin-image';
 
 // styled components
 import * as S from './styles';
+import { Typography } from '@mui/material';
 
 // props
 type HeroProps = {
@@ -12,15 +13,16 @@ type HeroProps = {
 };
 
 const Hero = ({ content, image, title }: HeroProps) => (
-	<S.HeroStyle>
+	<>
 		{image ? <S.Image alt={title} image={image} /> : null}
 
-		<S.Details>
-			<S.Title>{title}</S.Title>
+		<Typography variant='h4' component='h1' gutterBottom>
+			{title}
+		</Typography>
 
-			{content ? <S.Content>{content}</S.Content> : null}
-		</S.Details>
-	</S.HeroStyle>
+		{content ? { content } : null}
+
+	</>
 );
 
 export default Hero;
