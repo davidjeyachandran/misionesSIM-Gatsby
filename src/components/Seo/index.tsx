@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
+import favicon from '../../assets/favicon.png';
 
 type Meta = {
 	name: string;
@@ -72,7 +73,9 @@ const Seo = ({ title, description = '', lang = 'en', meta = [] }: SeoProps) => {
 					content: metaDescription
 				}
 			].concat(meta)}
-		/>
+		>
+			<link rel="icon" href={favicon} />
+		</Helmet>
 	);
 };
 
