@@ -31,12 +31,12 @@ const Home = ({ location }: PageProps<GraphQLResult>) => (
     </Container>
     <Container maxWidth='lg'>
       <Grid container spacing={2} sx={{ my: 2 }}>
-        <Grid item xs={6} sx={{ p: 2 }}>
+        <Grid item xs={12} lg={6} sx={{ p: 2 }}>
           <h2>Acerca de SIM</h2>
           <Typography sx={{ fontSize: '1.1em' }}>SIM es una misión con enfoque general. Apreciamos y trabajamos, de manera muy cercana, con agencias especializadas en la traducción de la Biblia, de alcance radial, desarrollo en comunidades, medicina, ministerios de HIV y SIDA, y aviación. Sin embargo, lo que nos distingue es nuestro interés en la Iglesia. Muchos de nuestros misioneros trabajan en la fundación de iglesias en áreas pioneras o de forma asociada en iglesias locales en los ministerios de discipulado, evangelismo o educación teológica.</Typography>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} lg={6}>
           <VideoWrapper>
             <iframe
               src="https://www.youtube.com/embed/YIIw-r8ZYAY"

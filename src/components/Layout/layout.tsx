@@ -11,7 +11,6 @@ import Navigation from '../Navigation';
 import Seo from '../Seo';
 
 // styled components
-import GlobalStyle from '../../styles/GlobalStyle';
 import theme from '../../styles/theme';
 
 type LayoutProps = {
@@ -21,7 +20,6 @@ type LayoutProps = {
 
 const Layout = ({ children, location }: LayoutProps) => (
 	<ThemeProvider theme={theme}>
-		<GlobalStyle />
 		<Seo title='MisionesSIM' />
 		<Navigation />
 		<main className='test'>{children}</main>
