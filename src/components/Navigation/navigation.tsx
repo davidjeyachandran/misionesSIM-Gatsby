@@ -43,14 +43,16 @@ const Navigation = () => {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.link} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
-          </ListItem>
+          <Link key={item.title} to={item.link}>
+            <ListItem key={item.link} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
-    </Box>
+    </Box >
   );
 
   const container = undefined;

@@ -21,14 +21,12 @@ type GraphQLResult = {
 
 const Home = ({ location }: PageProps<GraphQLResult>) => (
   <Layout location={location}>
-    <Container maxWidth={false}>
-      <StaticImage
-        alt='Header image of group of people'
-        src='../assets/slider1.jpg'
-        placeholder="blurred"
-        layout='fullWidth'
-      />
-    </Container>
+    <StaticImage
+      alt='Header image of group of people'
+      src='../assets/slider1.jpg'
+      placeholder="blurred"
+      layout='fullWidth'
+    />
     <Container maxWidth='lg'>
       <Grid container spacing={2} sx={{ my: 2 }}>
         <Grid item xs={12} lg={6} sx={{ p: 2 }}>

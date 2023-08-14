@@ -22,7 +22,7 @@ const Layout = ({ children, location }: LayoutProps) => (
 	<ThemeProvider theme={theme}>
 		<Seo title='MisionesSIM' />
 		<Navigation />
-		<main className='test'>{children}</main>
+		<main>{children}</main>
 		<Footer />
 	</ThemeProvider>
 );
