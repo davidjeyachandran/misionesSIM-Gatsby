@@ -43,7 +43,7 @@ const RegionTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
   const imgHero = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
   const imgMap = get(post, 'map.gatsbyImageData.images.sources[0].srcSet');
 
-  console.log(post);
+  // console.log(post);
 
   const richTextData = {
     raw: body.raw,

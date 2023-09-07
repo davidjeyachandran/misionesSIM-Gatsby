@@ -23,28 +23,31 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
 	const result = await graphql<GraphQLResult>(
 		`
-		{				
-			allContentfulRevista(filter: {node_locale: {eq: "en-US"}}, sort: { fields: [fecha], order: DESC }) {
-				nodes {
-					id
-					title
-					slug
-					fecha(formatString: "MMMM Do, YYYY")
-				}
+		{
+			allContentfulRevista(filter: {node_locale: {eq: "en-US"}}, sort: {fecha: DESC}) {
+			  nodes {
+				id
+				title
+				slug
+				fecha(formatString: "MMMM Do, YYYY")
+			  }
 			}
-			allContentfulBlogPost(filter: {node_locale: {eq: "en-US"}}, sort: { fields: [publishDate], order: DESC }) {
-				nodes {
-					title
-					slug
-				}
+			allContentfulBlogPost(
+			  filter: {node_locale: {eq: "en-US"}}
+			  sort: {publishDate: DESC}
+			) {
+			  nodes {
+				title
+				slug
+			  }
 			}
 			allContentfulRegion {
-				nodes {
-				  title
-				  slug
-				}
+			  nodes {
+				title
+				slug
 			  }
-		}
+			}
+		  }
 		`
 	);
 

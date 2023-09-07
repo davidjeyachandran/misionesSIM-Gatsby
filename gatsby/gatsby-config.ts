@@ -35,9 +35,6 @@ export default {
 		description: 'Sociedad Internacional Misionera',
 	},
 	pathPrefix: '/gatsby-contentful-starter',
-	flags: {
-		PARALLEL_QUERY_RUNNING: false
-	},
 	plugins: [
 		'gatsby-transformer-remark',
 		'gatsby-transformer-sharp',

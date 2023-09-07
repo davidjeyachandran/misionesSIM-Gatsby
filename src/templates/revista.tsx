@@ -52,7 +52,7 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 
 	const { id, title, coverImage, fecha, rawDate, inDesignID } = post;
 
-	console.log(data, location);
+	// console.log(data, location);
 
 	return (
 		<Layout location={location}>

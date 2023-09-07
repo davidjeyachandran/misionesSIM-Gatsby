@@ -58,15 +58,20 @@ export default RevistaVamos;
 
 export const pageQuery = graphql`
 	query RevistaIndexQuery {
-		allContentfulRevista(filter: {node_locale: {eq: "en-US"}}, sort: { fields: [fecha], order: DESC }) {
+		allContentfulRevista(filter: {node_locale: {eq: "en-US"}}, sort: {fecha: DESC}) {
 			nodes {
-				id
-				title
-				slug
-				fecha(formatString: "MMMM Do, YYYY")
-				coverImage {
-					gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)
-				}
+			id
+			title
+			slug
+			fecha(formatString: "MMMM Do, YYYY")
+			coverImage {
+				gatsbyImageData(
+				layout: FULL_WIDTH
+				placeholder: BLURRED
+				width: 424
+				height: 212
+				)
+			}
 			}
 		}
 	}
