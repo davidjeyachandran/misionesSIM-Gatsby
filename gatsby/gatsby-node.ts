@@ -20,6 +20,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 	const revistaTemplate = resolve('./src/templates/revista.tsx');
 	const blogTemplate = resolve('./src/templates/blog.tsx');
 	const regionTemplate = resolve('./src/templates/region.tsx'); 
+	
+	const removeLeadingSlash = (str: string | null | undefined): string => {
+		if (!str) return '';
+		if (str.startsWith('/')) return str.substring(1);
+		return str;
+	}
 
 	const result = await graphql<GraphQLResult>(
 		`
@@ -70,7 +76,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			const nextPostSlug = index === revistas.length - 1 ? null : revistas[index + 1].slug;
 			
 			createPage({
-				path: `/revistavamos/${post.slug}/`,
+				path: `/revistavamos/${removeLeadingSlash(post.slug)}/`,
 				component: revistaTemplate,
 				context: {
 					id: post.id,
@@ -89,7 +95,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			const nextPostSlug = index === blogs.length - 1 ? null : blogs[index + 1].slug;
 
 			createPage({
-				path: `/blog/${post.slug}/`,
+				path: `/blog/${removeLeadingSlash(post.slug)}/`,
 				component: blogTemplate,
 				context: {
 					slug: post.slug,
@@ -107,7 +113,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			const nextPostSlug = index === regions.length - 1 ? null : regions[index + 1].slug;
 
 			createPage({
-				path: `/regiones/${post.slug}/`,
+				path: `/regiones/${removeLeadingSlash(post.slug)}/`,
 				component: regionTemplate,
 				context: {
 					slug: post.slug,
