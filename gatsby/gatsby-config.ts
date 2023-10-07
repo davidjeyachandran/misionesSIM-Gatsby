@@ -33,6 +33,7 @@ export default {
 	siteMetadata: {
 		title: 'MisionesSIM',
 		description: 'Sociedad Internacional Misionera',
+		siteUrl: 'https://misionessim.netlify.app/'
 	},
 	pathPrefix: '/gatsby-contentful-starter',
 	plugins: [
@@ -42,6 +43,9 @@ export default {
 		'gatsby-plugin-sharp',
 		'gatsby-plugin-image',
 		'gatsby-plugin-styled-components',
+		{
+			resolve: 'gatsby-plugin-sitemap'
+		},
 		{
 			resolve: 'gatsby-source-contentful',
 			options: contentfulConfig
