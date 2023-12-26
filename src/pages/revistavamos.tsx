@@ -5,11 +5,11 @@ import type { PageProps } from 'gatsby';
 // components
 import { Container, TextField } from '@mui/material';
 import Layout from '../components/Layout';
-
-// types
 import type { SingleRevista } from '../types/types';
 import RevistaList from '../components/RevistaList';
 import RevistaCurrent from '../components/RevistaCurrent';
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
 
 type GraphQLResult = {
 	allContentfulRevista: {
@@ -34,6 +34,11 @@ const RevistaVamos = ({ data, location }: PageProps<GraphQLResult>) => {
 		setFilteredPosts(filtered.slice(1));
 	};
 
+	const handleClear = () => {
+		setSearch('');
+		setFilteredPosts(posts.slice(1));
+	};
+
 	useEffect(() => {
 
 	}, [posts]);
@@ -49,6 +54,13 @@ const RevistaVamos = ({ data, location }: PageProps<GraphQLResult>) => {
 					value={search}
 					onChange={handleSearchChange}
 					sx={{ my: 2, textAlign: 'center', width: 300 }}
+					InputProps={{
+						endAdornment: search && (
+							<IconButton onClick={handleClear} edge="end">
+								<ClearIcon />
+							</IconButton>
+						),
+					}}
 				/>
 				<RevistaList posts={filteredPosts} />
 			</Container>
