@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import type { GatsbyNode } from 'gatsby';
 import { SingleBlog, SingleRegion, SingleRevista } from '../src/types/types';
+import { removeLeadingSlash } from '../src/utils';
 
 type GraphQLResult = {
 	allContentfulRevista: {
@@ -20,12 +21,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 	const revistaTemplate = resolve('./src/templates/revista.tsx');
 	const blogTemplate = resolve('./src/templates/blog.tsx');
 	const regionTemplate = resolve('./src/templates/region.tsx'); 
-	
-	const removeLeadingSlash = (str: string | null | undefined): string => {
-		if (!str) return '';
-		if (str.startsWith('/')) return str.substring(1);
-		return str;
-	}
 
 	const result = await graphql<GraphQLResult>(
 		`
@@ -74,7 +69,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 		revistas.forEach((post, index) => {
 			const previousPostSlug = index === 0 ? null : revistas[index - 1].slug;
 			const nextPostSlug = index === revistas.length - 1 ? null : revistas[index + 1].slug;
-			
 			createPage({
 				path: `/revistavamos/${removeLeadingSlash(post.slug)}/`,
 				component: revistaTemplate,

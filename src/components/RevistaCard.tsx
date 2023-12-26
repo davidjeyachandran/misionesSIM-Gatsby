@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Link } from 'gatsby';
 import { styled } from '@mui/material';
+import { removeLeadingSlash } from '../utils';
 
 type CardProps = {
 	title: string;
@@ -27,7 +28,7 @@ const CardContentCustom = styled(CardContent)(`
 
 const RevistaCard = ({ title, subTitle, img, slug }: CardProps) => (
 	<CardCustom sx={{ width: 275 }}>
-		<Link to={`/revistavamos/${slug}`}>
+		<Link to={`/revistavamos/${removeLeadingSlash(slug)}`}>
 			<CardMedia
 				component='img'
 				height='390'

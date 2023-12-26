@@ -2,6 +2,7 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { Link } from 'gatsby';
 import { Box, Card, CardContent, CardHeader, CardMedia, Grid } from '@mui/material';
+import { removeLeadingSlash } from '../utils';
 
 type CardProps = {
 	title: string;
@@ -13,7 +14,7 @@ type CardProps = {
 
 const BlogCard = ({ title, date, img, slug, description }: CardProps) => (
 
-	<Link to={`/blog/${slug}`}>
+	<Link to={`/blog/${removeLeadingSlash(slug)}`}>
 		<Card sx={{ maxWidth: 345, m: 2 }}>
 			<CardHeader
 				title={title}

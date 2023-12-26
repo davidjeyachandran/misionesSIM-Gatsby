@@ -9,6 +9,7 @@ import Layout from '../components/Layout';
 // types
 import type { SingleRevista } from '../types/types';
 import RevistaList from '../components/RevistaList';
+import RevistaCurrent from '../components/RevistaCurrent';
 
 type GraphQLResult = {
 	allContentfulRevista: {
@@ -29,8 +30,8 @@ const RevistaVamos = ({ data, location }: PageProps<GraphQLResult>) => {
 			? posts
 			: posts.filter(
 				(item) => item.title.toLowerCase().includes(searchValue.toLowerCase())
-			);
-		setFilteredPosts(filtered);
+			)
+		setFilteredPosts(filtered.slice(1));
 	};
 
 	useEffect(() => {
@@ -40,6 +41,7 @@ const RevistaVamos = ({ data, location }: PageProps<GraphQLResult>) => {
 	return (
 		<Layout location={location}>
 			<Container maxWidth='lg'>
+				<RevistaCurrent post={posts?.length > 0 ? posts[0] : null} />
 				<TextField
 					id='outlined-basic'
 					label='Buscar...'
