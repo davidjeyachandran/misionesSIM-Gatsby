@@ -8,12 +8,11 @@ import { get } from 'lodash-es';
 import { Container, Box, Button, Modal } from '@mui/material';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
-
+import RelatedBlogs from '../components/RelatedBlogs';
+import PreviousNext from '../components/PreviousNext';
 
 // types
 import type { NextPrevious, SingleBlog, SingleRevista } from '../types/types';
-import RelatedBlogs from '../components/RelatedBlogs';
-import { removeLeadingSlash } from '../utils';
 
 type GraphQLResult = {
 	contentfulRevista: SingleRevista;
@@ -68,28 +67,10 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 				{/* <S.Body dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} /> */}
 				{inDesignID ? (<Button variant='outlined' onClick={handleOpen}>Leer Revista online</Button>) : ''}
 
-				{(previous || next) && (
 
-					<ul>
-						{previous && (
-							<li>
-								<Link to={`/revistavamos/${removeLeadingSlash(previous.slug)}`} rel='prev'>
-									← {previous.title}
-								</Link>
-							</li>
-						)}
-						{next && (
-							<li>
-								<Link to={`/revistavamos/${removeLeadingSlash(next.slug)}`} rel='next'>
-									{next.title} →
-								</Link>
-							</li>
-						)}
-					</ul>
+				<PreviousNext sectionUrl='/revistavamos' previous={previous} next={next} />
 
-				)}
-
-
+				{/* show only for desktop */}
 				<Modal
 					open={open}
 					onClose={handleClose}
