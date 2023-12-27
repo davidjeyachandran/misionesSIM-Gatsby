@@ -13,6 +13,7 @@ import Seo from '../components/Seo';
 // types
 import type { NextPrevious, SingleBlog, SingleRevista } from '../types/types';
 import RelatedBlogs from '../components/RelatedBlogs';
+import { removeLeadingSlash } from '../utils';
 
 type GraphQLResult = {
 	contentfulRevista: SingleRevista;
@@ -52,8 +53,6 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 
 	const { id, title, coverImage, fecha, rawDate, inDesignID } = post;
 
-	// console.log(data, location);
-
 	return (
 		<Layout location={location}>
 			<Seo title={title} />
@@ -74,14 +73,14 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 					<ul>
 						{previous && (
 							<li>
-								<Link to={`/revistavamos/${previous.slug}`} rel='prev'>
+								<Link to={`/revistavamos/${removeLeadingSlash(previous.slug)}`} rel='prev'>
 									← {previous.title}
 								</Link>
 							</li>
 						)}
 						{next && (
 							<li>
-								<Link to={`/revistavamos/${next.slug}`} rel='next'>
+								<Link to={`/revistavamos/${removeLeadingSlash(next.slug)}`} rel='next'>
 									{next.title} →
 								</Link>
 							</li>

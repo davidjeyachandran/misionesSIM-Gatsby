@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a:hover {
-    color: #4a90e2;
+    color: #FA002C;
   }
 
   a.active {

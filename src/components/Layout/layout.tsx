@@ -12,6 +12,7 @@ import Seo from '../Seo';
 
 // styled components
 import theme from '../../styles/theme';
+import GlobalStyle from '../../styles/GlobalStyle';
 
 type LayoutProps = {
 	children: ReactNode;
@@ -20,6 +21,7 @@ type LayoutProps = {
 
 const Layout = ({ children, location }: LayoutProps) => (
 	<ThemeProvider theme={theme}>
+		<GlobalStyle />
 		<Seo title='MisionesSIM' />
 		<Navigation />
 		<main>{children}</main>
