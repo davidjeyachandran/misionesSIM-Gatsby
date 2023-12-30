@@ -5,7 +5,7 @@ import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 
 // components
-import { Container, Box, Button, Modal } from '@mui/material';
+import { Container, Box, Button, Modal, Grid } from '@mui/material';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import RelatedBlogs from '../components/RelatedBlogs';
@@ -13,6 +13,7 @@ import PreviousNext from '../components/PreviousNext';
 
 // types
 import type { NextPrevious, SingleBlog, SingleRevista } from '../types/types';
+import RevistaCard from '../components/RevistaCard';
 
 type GraphQLResult = {
 	contentfulRevista: SingleRevista;
@@ -55,37 +56,54 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	return (
 		<Layout location={location}>
 			<Seo title={title} />
-			<GatsbyImage style={{ maxHeight: 300 }} image={coverImage?.gatsbyImageData} alt={title} />
 			<Container>
 				<h1>{title}</h1>
 				<time dateTime={rawDate}>{fecha}</time>
 				<br />
-				<a href={downloadLink} style={{ textDecoration: 'none' }}>
-					<Button variant='outlined'>Download Revista</Button>
-				</a>
-				<br />
-				{/* <S.Body dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} /> */}
-				{inDesignID ? (<Button variant='outlined' onClick={handleOpen}>Leer Revista online</Button>) : ''}
+				{/* <GatsbyImage style={{ maxHeight: 300 }} image={coverImage?.gatsbyImageData} alt={title} /> */}
+				<Grid container spacing={4}>
+					<Grid item xs={12} md={4}>
+						<Grid container spacing={2} sx={{ my: 1 }}>
+							<Grid item xs={12} md={6}>
+								<a href={downloadLink} style={{ textDecoration: 'none' }}>
+									<Button fullWidth variant='outlined'>Descarga Revista</Button>
+								</a>
+							</Grid>
+							<Grid item xs={12} md={6}>
+								{inDesignID ? (<Button fullWidth variant='outlined' onClick={handleOpen}>Leer Revista online</Button>) : ''}
+							</Grid>
+						</Grid>
 
+						<GatsbyImage image={coverImage?.gatsbyImageData} alt={title} />
 
-				<PreviousNext sectionUrl='/revistavamos' previous={previous} next={next} />
+						<div dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} />
 
-				{/* show only for desktop */}
-				<Modal
-					open={open}
-					onClose={handleClose}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
-				>
-					<Box sx={styleModal}>
-						{inDesignID && <iframe src={inDesignID} width="100%" height="90%" allowFullScreen></iframe>}
-						<Button sx={{ margin: '0 auto', textAlign: 'center' }} onClick={handleClose}>Cerrar</Button>
-					</Box>
-				</Modal>
+						<RevistaCard title={title} img={coverImage} slug='' date={fecha} />
 
-				<RelatedBlogs blogPosts={blogPosts} />
+						<PreviousNext sectionUrl='/revistavamos' previous={previous} next={next} />
+
+						{/* show only for desktop */}
+						<Modal
+							open={open}
+							onClose={handleClose}
+							aria-labelledby="modal-modal-title"
+							aria-describedby="modal-modal-description"
+						>
+							<Box sx={styleModal}>
+								{inDesignID && <iframe src={inDesignID} width="100%" height="90%" allowFullScreen></iframe>}
+								<Button sx={{ margin: '0 auto', textAlign: 'center' }} onClick={handleClose}>Cerrar</Button>
+							</Box>
+						</Modal>
+
+					</Grid>
+
+					<Grid item xs={12} md={8}>
+						<RelatedBlogs blogPosts={blogPosts} />
+					</Grid>
+
+				</Grid>
 			</Container>
-		</Layout>
+		</Layout >
 	);
 };
 

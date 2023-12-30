@@ -13,10 +13,10 @@ type CardProps = {
 }
 
 const BlogCard = ({ title, date, img, slug, description }: CardProps) => (
-
 	<Link to={`/blog/${removeLeadingSlash(slug)}`}>
 		<Card sx={{ maxWidth: 345, m: 2 }}>
 			<CardHeader
+				titleTypographyProps={{ variant: 'h6' }}
 				title={title}
 				subheader={date}
 			/>
@@ -27,7 +27,7 @@ const BlogCard = ({ title, date, img, slug, description }: CardProps) => (
 				alt={title}
 			/>
 			<CardContent>
-				<Typography variant="body2" color="text.secondary">
+				<Typography color="text.secondary">
 					{description}
 				</Typography>
 			</CardContent>

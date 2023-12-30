@@ -61,8 +61,8 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 								{revista && (
 									<RevistaCard
 										title={revista.title}
-										subTitle={revista.fecha}
-										img={revistaImg}
+										date={revista.fecha}
+										img={revista.coverImage}
 										slug={revista.slug}
 									/>
 								)}

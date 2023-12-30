@@ -24,7 +24,8 @@ export type SingleRevista = {
 	author: {
 		name: string;
 	};
-	body: RenderRichTextData<ContentfulRichTextGatsbyReference>;
+	// body: RenderRichTextData<ContentfulRichTextGatsbyReference>;
+	body: any;
 	coverImage: {
 		gatsbyImageData: IGatsbyImageData;
 		resize: {

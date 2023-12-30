@@ -17,15 +17,14 @@ const RevistaList = ({ posts }: RevistaListProps) => (
 		justifyContent='center'
 	>
 		{posts.map((revista: SingleRevista) => {
-			const coverImage = revista.coverImage?.gatsbyImageData.images.fallback?.src || '';
 
-			const { id, title: titleRevista, fecha, slug } = revista;
+			const { id, title: titleRevista, coverImage, fecha, slug } = revista;
 			return (
 				<Grid item key={id}>
 					<RevistaCard
 						title={titleRevista}
 						img={coverImage}
-						subTitle={fecha}
+						date={fecha}
 						slug={slug}
 					/>
 				</Grid>

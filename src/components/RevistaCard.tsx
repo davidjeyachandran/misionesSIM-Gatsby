@@ -6,12 +6,13 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'gatsby';
 import { styled } from '@mui/material';
 import { removeLeadingSlash } from '../utils';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 type CardProps = {
 	title: string;
-	subTitle: string;
-	img: string;
-	slug: string
+	date: string;
+	img?: any;
+	slug: string;
 }
 
 const CardCustom = styled(Card)(`
@@ -26,21 +27,18 @@ const CardContentCustom = styled(CardContent)(`
 	}
 `)
 
-const RevistaCard = ({ title, subTitle, img, slug }: CardProps) => (
+const RevistaCard = ({ title, date, img, slug }: CardProps) => (
 	<CardCustom sx={{ width: 275 }}>
 		<Link to={`/revistavamos/${removeLeadingSlash(slug)}`}>
-			<CardMedia
-				component='img'
-				height='390'
-				image={img}
-				alt={title}
-			/>
+			<CardMedia>
+				<GatsbyImage style={{ height: 400 }} image={img?.gatsbyImageData} alt={title} />
+			</CardMedia>
 			<CardContentCustom>
 				<Typography gutterBottom variant='h6' component='div' sx={{ minHeight: 40, lineHeight: 1.2 }}>
 					{title}
 				</Typography>
 				<Typography variant='body2' color='text.secondary'>
-					{subTitle}
+					{date}
 				</Typography>
 			</CardContentCustom>
 		</Link>

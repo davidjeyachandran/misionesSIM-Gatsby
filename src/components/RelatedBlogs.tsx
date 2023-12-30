@@ -23,12 +23,20 @@ interface RelatedBlogsProps {
 
 const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ blogPosts }) => {
   return (<>
-    <h2>Blog Relacionada</h2>
     <Grid container>
-      {blogPosts.map((blog) => {
-        const img = get(blog, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
-        return <BlogCard key={blog.slug} title={blog?.title} img={img} slug={blog.slug} description={blog?.description.description} />;
-      })}
+      <h2>Blog Relacionada</h2>
+      <Grid container>
+        {blogPosts.map((blog) => {
+          const img = get(blog, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
+          return <BlogCard key={blog.slug}
+            date={blog.publishDate}
+            title={blog?.title}
+            img={img}
+            slug={blog.slug}
+            description={blog?.description.description}
+          />;
+        })}
+      </Grid>
     </Grid>
   </>
   )
