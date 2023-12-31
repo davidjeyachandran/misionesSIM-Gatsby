@@ -14,6 +14,7 @@ import Seo from '../components/Seo';
 // types
 import type { NextPrevious, SingleBlog } from '../types/types';
 import RevistaCard from '../components/RevistaCard';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const options = {
 	renderMark: {
@@ -41,8 +42,8 @@ type GraphQLResult = {
 const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const post = data.contentfulBlogPost;
 	const { title, body, revista } = post;
+	const { title: titleRevista, fecha, coverImage, slug } = revista;
 	const img = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
-	const revistaImg = get(revista, 'coverImage.gatsbyImageData.images.fallback.src', '')
 
 	return (
 		<Layout location={location}>
@@ -51,7 +52,7 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 				<Grid container>
 					<Grid item md={8}>
 						<Hero title={post.title} />
-						<img width='100%' srcSet={img} alt={title} />
+						<GatsbyImage image={post?.heroImage?.gatsbyImageData} alt={title} />
 						{body && renderRichText(body, options)}
 					</Grid>
 					<Grid md={4} item>
@@ -60,10 +61,10 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 								<h2>Revista relacionada</h2><br />
 								{revista && (
 									<RevistaCard
-										title={revista.title}
-										date={revista.fecha}
-										img={revista.coverImage}
-										slug={revista.slug}
+										title={titleRevista}
+										date={fecha}
+										img={coverImage}
+										slug={slug}
 									/>
 								)}
 							</Box>
@@ -90,7 +91,7 @@ query BlogQuery($slug: String!) {
       raw
     }
 	heroImage {
-		gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)
+		gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 300)
 	}
 	revista {
 		slug

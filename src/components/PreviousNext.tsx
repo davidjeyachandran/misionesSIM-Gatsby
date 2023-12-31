@@ -1,6 +1,9 @@
 import { Link } from 'gatsby'
 import React from 'react'
 import { removeLeadingSlash } from '../utils'
+import { Box, Button } from '@mui/material'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 type PreviousNextProps = {
     sectionUrl: string,
@@ -21,22 +24,20 @@ const PreviousNext = ({ sectionUrl, previous, next }: PreviousNextProps) => {
 
     if (previous || next) {
         return (
-            <ul>
+            <Box display="flex"
+                justifyContent="space-between">
                 {previous && (
-                    <li>
-                        <Link to={previousLink} rel='prev'>
-                            ← {previous.title}
-                        </Link>
-                    </li>
+                    <Link to={previousLink} rel='previous'>
+                        <Button variant="text" startIcon={<ArrowBackIosNewIcon />}>{previous.title}</Button>
+                    </Link>
                 )}
+
                 {next && (
-                    <li>
-                        <Link to={nextLink} rel='next'>
-                            {next.title} →
-                        </Link>
-                    </li>
+                    <Link to={nextLink} rel='next'>
+                        <Button sx={{ marginLeft: "auto" }} variant="text" endIcon={<ArrowForwardIosIcon />}>{next.title}</Button>
+                    </Link>
                 )}
-            </ul>
+            </Box>
         )
     }
 

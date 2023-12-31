@@ -20,12 +20,13 @@ const RevistaList = ({ posts }: RevistaListProps) => (
 
 			const { id, title: titleRevista, coverImage, fecha, slug } = revista;
 			return (
-				<Grid item key={id}>
+				<Grid item key={id} width={275}>
 					<RevistaCard
 						title={titleRevista}
 						img={coverImage}
 						date={fecha}
 						slug={slug}
+						height={380}
 					/>
 				</Grid>
 			);

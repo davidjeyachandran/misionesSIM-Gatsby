@@ -12,6 +12,7 @@ type CardProps = {
 	title: string;
 	date: string;
 	img?: any;
+	height?: number;
 	slug: string;
 }
 
@@ -27,11 +28,11 @@ const CardContentCustom = styled(CardContent)(`
 	}
 `)
 
-const RevistaCard = ({ title, date, img, slug }: CardProps) => (
-	<CardCustom sx={{ width: 275 }}>
+const RevistaCard = ({ title, date, img, slug, height }: CardProps) => (
+	<CardCustom>
 		<Link to={`/revistavamos/${removeLeadingSlash(slug)}`}>
 			<CardMedia>
-				<GatsbyImage style={{ height: 400 }} image={img?.gatsbyImageData} alt={title} />
+				<GatsbyImage style={{ height }} image={img?.gatsbyImageData} alt={title} />
 			</CardMedia>
 			<CardContentCustom>
 				<Typography gutterBottom variant='h6' component='div' sx={{ minHeight: 40, lineHeight: 1.2 }}>

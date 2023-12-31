@@ -5,7 +5,7 @@ import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 
 // components
-import { Container, Box, Button, Modal, Grid } from '@mui/material';
+import { Container, Box, Button, Modal, Grid, Typography } from '@mui/material';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import RelatedBlogs from '../components/RelatedBlogs';
@@ -57,29 +57,31 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 		<Layout location={location}>
 			<Seo title={title} />
 			<Container>
-				<h1>{title}</h1>
+				<Typography component='h1' variant='h3' sx={{ mb: 0 }}>{title}</Typography>
 				<time dateTime={rawDate}>{fecha}</time>
-				<br />
-				{/* <GatsbyImage style={{ maxHeight: 300 }} image={coverImage?.gatsbyImageData} alt={title} /> */}
-				<Grid container spacing={4}>
+
+				<Grid container spacing={6}>
 					<Grid item xs={12} md={4}>
-						<Grid container spacing={2} sx={{ my: 1 }}>
-							<Grid item xs={12} md={6}>
-								<a href={downloadLink} style={{ textDecoration: 'none' }}>
-									<Button fullWidth variant='outlined'>Descarga Revista</Button>
-								</a>
-							</Grid>
-							<Grid item xs={12} md={6}>
-								{inDesignID ? (<Button fullWidth variant='outlined' onClick={handleOpen}>Leer Revista online</Button>) : ''}
-							</Grid>
-						</Grid>
 
-						<GatsbyImage image={coverImage?.gatsbyImageData} alt={title} />
-
-						<div dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} />
+						<a href={downloadLink} style={{ textDecoration: 'none' }}>
+							<Button variant='contained' fullWidth sx={{ my: 3, p: 1 }}>
+								Descarga Revista
+							</Button>
+						</a>
 
 						<RevistaCard title={title} img={coverImage} slug='' date={fecha} />
 
+						{inDesignID &&
+							(<Button
+								fullWidth
+								sx={{ my: 2 }}
+								variant='outlined'
+								onClick={handleOpen}>
+								Leer Revista online
+							</Button>)}
+
+
+						<div dangerouslySetInnerHTML={{ __html: post.body?.childMarkdownRemark?.html }} />
 						<PreviousNext sectionUrl='/revistavamos' previous={previous} next={next} />
 
 						{/* show only for desktop */}
