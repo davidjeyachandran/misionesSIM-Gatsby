@@ -42,7 +42,7 @@ type GraphQLResult = {
 const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const post = data.contentfulBlogPost;
 	const { title, body, publishDate, revista } = post;
-	const { title: titleRevista, fecha, coverImage, slug } = revista;
+	const { title: titleRevista, fecha, coverImage, slug } = revista ?? {};
 	const img = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
 
 	return (
@@ -50,9 +50,9 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 			<Seo title={post.title} />
 			<Container maxWidth='lg'>
 				<Grid container spacing={6}>
-					<Grid item xs={12} md={3} order={{ xs: 2, md: 1 }}>
+					{revista && <Grid item xs={12} md={3} order={{ xs: 2, md: 1 }}>
 						<RevistaCard title={titleRevista} img={coverImage} slug={slug} date={fecha} />
-					</Grid>
+					</Grid>}
 					<Grid item xs={12} md={9} order={{ xs: 1, md: 2 }}>
 						<Hero title={post.title} />
 						<Typography color='#999'>{publishDate}</Typography>
