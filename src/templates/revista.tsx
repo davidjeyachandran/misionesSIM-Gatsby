@@ -56,11 +56,11 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	return (
 		<Layout location={location}>
 			<Seo title={title} />
-			<Container>
+			<Container maxWidth='xl'>
 				<Typography component='h1' variant='h3' sx={{ mb: 0 }}>{title}</Typography>
 				<time dateTime={rawDate}>{fecha}</time>
 
-				<Grid container spacing={6}>
+				<Grid container spacing={10}>
 					<Grid item xs={12} md={4}>
 
 						<a href={downloadLink} style={{ textDecoration: 'none' }}>
@@ -99,7 +99,7 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 
 					</Grid>
 
-					<Grid item xs={12} md={8}>
+					<Grid item xs={12} md={8} sx={{ mt: 3 }}>
 						<RelatedBlogs blogPosts={blogPosts} />
 					</Grid>
 

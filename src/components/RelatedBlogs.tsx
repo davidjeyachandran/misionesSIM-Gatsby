@@ -25,13 +25,14 @@ const RelatedBlogs: React.FC<RelatedBlogsProps> = ({ blogPosts }) => {
   return (
     <Grid container>
       {blogPosts.map((blog) => {
-        const img = get(blog, 'heroImage.gatsbyImageData.images.sources[0].srcSet', '');
+        const { title, slug, publishDate, heroImage } = blog;
+        const description = get(blog, 'description.description', '')
         return <BlogCard key={blog.slug}
-          date={blog.publishDate}
-          title={blog?.title}
-          img={img}
-          slug={blog.slug}
-          description={blog?.description.description}
+          date={publishDate}
+          title={title}
+          img={heroImage}
+          slug={slug}
+          description={description}
         />;
       })}
     </Grid>
