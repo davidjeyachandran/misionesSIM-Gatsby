@@ -50,9 +50,9 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 			<Seo title={post.title} />
 			<Container maxWidth='lg'>
 				<Grid container spacing={6}>
-					{revista && <Grid item xs={12} md={3} order={{ xs: 2, md: 1 }}>
+					<Grid item xs={12} md={3} order={{ xs: 2, md: 1 }}>
 						<RevistaCard title={titleRevista} img={coverImage} slug={slug} date={fecha} />
-					</Grid>}
+					</Grid>
 					<Grid item xs={12} md={9} order={{ xs: 1, md: 2 }}>
 						<Hero title={post.title} />
 						<Typography color='#999'>{publishDate}</Typography>
