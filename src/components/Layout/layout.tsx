@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from '@mui/material';
 
 // types
 import type { ReactNode } from 'react';

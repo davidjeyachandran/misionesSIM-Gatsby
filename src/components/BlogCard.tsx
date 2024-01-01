@@ -15,7 +15,7 @@ type CardProps = {
 
 const BlogCard = ({ title, date, img, slug, description }: CardProps) => (
 	<Grid container sx={{ mb: 6 }}>
-		<Grid xs={4} sx={{ pr: 4 }}>
+		<Grid xs={4} sx={{ pr: 2 }}>
 			<Link to={`/blog/${removeLeadingSlash(slug)}`}>
 				<GatsbyImage image={img?.gatsbyImageData} alt={title} />
 			</Link>

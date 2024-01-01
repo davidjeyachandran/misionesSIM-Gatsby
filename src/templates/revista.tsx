@@ -64,8 +64,8 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 					<Grid item xs={12} md={4}>
 
 						<a href={downloadLink} style={{ textDecoration: 'none' }}>
-							<Button variant='contained' fullWidth sx={{ my: 3, p: 1 }}>
-								Descarga Revista
+							<Button color="primary" variant='contained' fullWidth sx={{ my: 4, p: 1 }}>
+								<strong>Descarga Revista</strong>
 							</Button>
 						</a>
 

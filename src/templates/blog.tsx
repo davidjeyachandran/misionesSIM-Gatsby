@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { BLOCKS, MARKS } from '../constants';
 
 // components
@@ -41,7 +41,7 @@ type GraphQLResult = {
 
 const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const post = data.contentfulBlogPost;
-	const { title, body, revista } = post;
+	const { title, body, publishDate, revista } = post;
 	const { title: titleRevista, fecha, coverImage, slug } = revista;
 	const img = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
 
@@ -49,28 +49,18 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 		<Layout location={location}>
 			<Seo title={post.title} />
 			<Container maxWidth='lg'>
-				<Grid container>
-					<Grid item md={8}>
+				<Grid container spacing={6}>
+					<Grid item xs={12} md={3} order={{ xs: 2, md: 1 }}>
+						<RevistaCard title={titleRevista} img={coverImage} slug={slug} date={fecha} />
+					</Grid>
+					<Grid item xs={12} md={9} order={{ xs: 1, md: 2 }}>
 						<Hero title={post.title} />
+						<Typography color='#999'>{publishDate}</Typography>
 						<GatsbyImage image={post?.heroImage?.gatsbyImageData} alt={title} />
 						{body && renderRichText(body, options)}
 					</Grid>
-					<Grid md={4} item>
-						<Grid container justifyContent="center">
-							<Box sx={{ flexDirection: 'column' }}>
-								<h2>Revista relacionada</h2><br />
-								{revista && (
-									<RevistaCard
-										title={titleRevista}
-										date={fecha}
-										img={coverImage}
-										slug={slug}
-									/>
-								)}
-							</Box>
-						</Grid>
-					</Grid>
 				</Grid>
+
 			</Container>
 		</Layout>
 	);
@@ -83,7 +73,7 @@ query BlogQuery($slug: String!) {
   contentfulBlogPost(slug: { eq: $slug}) {
     id
     nid
-    publishDate
+    publishDate(formatString: "MMMM Do, YYYY")
     slug
     title
     updatedAt
@@ -96,7 +86,7 @@ query BlogQuery($slug: String!) {
 	revista {
 		slug
 		title
-		fecha
+		fecha(formatString: "MMMM Do, YYYY")
 		id
 		coverImage {
 			gatsbyImageData(placeholder: BLURRED, width: 275)
