@@ -1,8 +1,9 @@
 import React from 'react'
 import { SingleRevista } from '../../types/types'
-import { CardMedia, Typography } from '@mui/material';
+import { Box, CardMedia, Typography } from '@mui/material';
 import { Link } from 'gatsby';
 import { removeLeadingSlash } from '../../utils';
+import RevistaCard from '../RevistaCard';
 
 type RevistaCurrentProps = {
     post: SingleRevista | null;
@@ -12,27 +13,19 @@ const RevistaCurrent = ({ post }: RevistaCurrentProps) => {
 
     if (!post) return null;
 
-    const { title, slug } = post;
-    const coverImage = post.coverImage?.gatsbyImageData.images.fallback?.src || '';
+    const { title, slug, fecha, coverImage } = post;
     const cleanSlug = removeLeadingSlash(slug);
 
     return (
-        <>
+        <Box width={300}>
             <Link to={`/revistavamos/${cleanSlug}`}>
-                <Typography gutterBottom variant='h6' component='div' sx={{ minHeight: 40, lineHeight: 1.2 }}>
+                <Typography gutterBottom variant='h4' component='div' sx={{ minHeight: 40, lineHeight: 1.2 }}>
                     {title}
                 </Typography>
             </Link>
 
-            <Link to={`/revistavamos/${cleanSlug}`}>
-                <CardMedia
-                    component='img'
-                    height='390'
-                    image={coverImage}
-                    alt={title}
-                />
-            </Link>
-        </>
+            <RevistaCard height={440} title={title} img={coverImage} slug={slug} date={fecha} />
+        </Box>
     )
 }
 

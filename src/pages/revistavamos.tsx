@@ -31,12 +31,13 @@ const RevistaVamos = ({ data, location }: PageProps<GraphQLResult>) => {
 			: posts.filter(
 				(item) => item.title.toLowerCase().includes(searchValue.toLowerCase())
 			)
-		setFilteredPosts(filtered.slice(1));
+
+		setFilteredPosts(filtered);
 	};
 
 	const handleClear = () => {
 		setSearch('');
-		setFilteredPosts(posts.slice(1));
+		setFilteredPosts(posts);
 	};
 
 	useEffect(() => {

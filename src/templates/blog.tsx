@@ -1,10 +1,11 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import { BLOCKS, MARKS } from '../constants';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 // components
 import Hero from '../components/Hero';
@@ -15,6 +16,7 @@ import Seo from '../components/Seo';
 import type { NextPrevious, SingleBlog } from '../types/types';
 import RevistaCard from '../components/RevistaCard';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { removeLeadingSlash } from '../utils';
 
 const options = {
 	renderMark: {
@@ -51,6 +53,10 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 			<Container maxWidth='lg'>
 				<Grid container spacing={6}>
 					<Grid item xs={12} md={3} order={{ xs: 2, md: 1 }}>
+						<Link to={`/revistavamos/${removeLeadingSlash(slug)}`} rel='back'>
+							<Button variant="text" sx={{ mb: 2 }} startIcon={<ArrowBackIosNewIcon />}>la Revista</Button>
+						</Link>
+
 						<RevistaCard title={titleRevista} img={coverImage} slug={slug} date={fecha} />
 					</Grid>
 					<Grid item xs={12} md={9} order={{ xs: 1, md: 2 }}>

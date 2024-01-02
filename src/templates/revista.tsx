@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, graphql } from 'gatsby';
-import { GatsbyImage } from "gatsby-plugin-image"
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 
@@ -10,10 +9,11 @@ import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import RelatedBlogs from '../components/RelatedBlogs';
 import PreviousNext from '../components/PreviousNext';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import RevistaCard from '../components/RevistaCard';
 
 // types
 import type { NextPrevious, SingleBlog, SingleRevista } from '../types/types';
-import RevistaCard from '../components/RevistaCard';
 
 type GraphQLResult = {
 	contentfulRevista: SingleRevista;
@@ -42,7 +42,6 @@ const styleModal = {
 const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const blogPosts = data.allContentfulBlogPost.nodes;
 	const post = data.contentfulRevista;
-	// const blogs = 
 	const { previous } = data;
 	const { next } = data;
 	const [open, setOpen] = useState(false);
@@ -56,15 +55,20 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	return (
 		<Layout location={location}>
 			<Seo title={title} />
-			<Container maxWidth='xl'>
+			<Container maxWidth='lg'>
+				<Link to='/revistavamos' rel='back'>
+					<Button variant="text" sx={{ mt: 2 }} startIcon={<ArrowBackIosNewIcon />}>Todas Revistas</Button>
+				</Link>
+
 				<Typography component='h1' variant='h3' sx={{ mb: 0 }}>{title}</Typography>
 				<time dateTime={rawDate}>{fecha}</time>
 
 				<Grid container spacing={10}>
 					<Grid item xs={12} md={4}>
 
+
 						<a href={downloadLink} style={{ textDecoration: 'none' }}>
-							<Button color="primary" variant='contained' fullWidth sx={{ my: 4, p: 1 }}>
+							<Button color="primary" variant='contained' fullWidth sx={{ my: 3, p: 1 }}>
 								<strong>Descarga Revista</strong>
 							</Button>
 						</a>
