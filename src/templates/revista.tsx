@@ -66,12 +66,19 @@ const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 				<Grid container spacing={10}>
 					<Grid item xs={12} md={4}>
 
-
-						<a href={downloadLink} style={{ textDecoration: 'none' }}>
-							<Button color="primary" variant='contained' fullWidth sx={{ my: 3, p: 1 }}>
-								<strong>Descarga Revista</strong>
-							</Button>
-						</a>
+						<Button
+							component='a'
+							href={downloadLink}
+							target='_blank'
+							color="primary"
+							variant='contained' fullWidth
+							sx={{
+								my: 3, p: 1, '&:hover': {
+									color: 'white',
+								}
+							}}>
+							<strong>Descarga Revista</strong>
+						</Button>
 
 						<RevistaCard title={title} img={coverImage} slug='' date={fecha} />
 

@@ -17,15 +17,16 @@ const RevistaCurrent = ({ post }: RevistaCurrentProps) => {
     const cleanSlug = removeLeadingSlash(slug);
 
     return (
-        <Box width={300}>
+        <>
             <Link to={`/revistavamos/${cleanSlug}`}>
-                <Typography gutterBottom variant='h4' component='div' sx={{ minHeight: 40, lineHeight: 1.2 }}>
-                    {title}
+                <Typography gutterBottom component='h2' variant='h3' sx={{ minHeight: 40, lineHeight: 1.2 }}>
+                    Revista Actual
                 </Typography>
             </Link>
-
-            <RevistaCard height={440} title={title} img={coverImage} slug={slug} date={fecha} />
-        </Box>
+            <Box width={300}>
+                <RevistaCard height={440} title={title} img={coverImage} slug={slug} date={fecha} />
+            </Box>
+        </>
     )
 }
 

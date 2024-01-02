@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 
 // components
-import { Container, TextField } from '@mui/material';
+import { Button, Container, TextField, Typography } from '@mui/material';
 import Layout from '../components/Layout';
 import type { SingleRevista } from '../types/types';
 import RevistaList from '../components/RevistaList';
@@ -48,9 +48,17 @@ const RevistaVamos = ({ data, location }: PageProps<GraphQLResult>) => {
 		<Layout location={location}>
 			<Container maxWidth='lg'>
 				<RevistaCurrent post={posts?.length > 0 ? posts[0] : null} />
+
+				<Button variant='contained' sx={{ my: 3, px: 4 }}>
+					Suscríbete
+				</Button>
+
+				<hr />
+				<Typography component='h2' variant='h3' sx={{ my: 3 }}>Ediciones Anteriores</Typography>
+
 				<TextField
 					id='outlined-basic'
-					label='Buscar...'
+					label='Buscar Revista'
 					variant='outlined'
 					value={search}
 					onChange={handleSearchChange}

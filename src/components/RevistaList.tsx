@@ -11,10 +11,9 @@ const RevistaList = ({ posts }: RevistaListProps) => (
 	<Grid
 		container
 		spacing={2}
-		bgcolor='#eee'
 		direction='row'
 		alignItems='center'
-		justifyContent='center'
+		justifyContent='space-between'
 	>
 		{posts.map((revista: SingleRevista) => {
 
