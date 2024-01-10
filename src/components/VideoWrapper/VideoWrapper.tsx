@@ -6,6 +6,7 @@ const VideoContainer = styled.div`
   width: 100%;
   height: 0;
   padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  background-color: black;
 
   iframe {
     position: absolute;
@@ -17,11 +18,11 @@ const VideoContainer = styled.div`
 `;
 
 interface VideoWrapperProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 const VideoWrapper: React.FC<VideoWrapperProps> = ({ children }) => (
-    <VideoContainer>{children}</VideoContainer>
+  <VideoContainer>{children}</VideoContainer>
 );
 
 

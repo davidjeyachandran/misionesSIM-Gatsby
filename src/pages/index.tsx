@@ -1,10 +1,9 @@
 import React from 'react';
-import { graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 import VideoWrapper from '../components/VideoWrapper'
 
 // components
-import { Container, Grid, TableRow, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import Layout from '../components/Layout';
 
 // types
@@ -12,6 +11,7 @@ import type { SingleRevista } from '../types/types';
 import RevistaList from '../components/RevistaList';
 import { StaticImage } from 'gatsby-plugin-image';
 import SIMMap from '../components/SIMMap';
+import YouTubeFrame from '../components/YoutubeFrame/YouTubeFrame';
 
 type GraphQLResult = {
   allContentfulRevista: {
@@ -36,12 +36,8 @@ const Home = ({ location }: PageProps<GraphQLResult>) => (
 
         <Grid item xs={12} lg={6}>
           <VideoWrapper>
-            <iframe
-              src="https://www.youtube.com/embed/YIIw-r8ZYAY"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen>
-            </iframe>
+            <YouTubeFrame title='Qué es SIM' video='YIIw-r8ZYAY' width={'500'} height='320' thumbnailQuality={'mqdefault'} />
+
           </VideoWrapper>
         </Grid>
       </Grid>

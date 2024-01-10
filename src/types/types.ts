@@ -33,6 +33,11 @@ export type SingleRevista = {
 		};
 	};
 	inDesignID: string | null;
+	revistaPDF: {
+		file: {
+			url: string;
+		}
+	};
 	fecha: string;
 	rawDate: string;
 	slug: string;
