@@ -15,12 +15,12 @@ type CardProps = {
 
 const BlogCard = ({ title, date, img, slug, description }: CardProps) => (
 	<Grid container sx={{ mb: 6 }}>
-		<Grid xs={4} sx={{ pr: 2 }}>
+		<Grid item xs={4} sx={{ pr: 2 }}>
 			<Link to={`/blog/${removeLeadingSlash(slug)}`}>
 				<GatsbyImage image={img?.gatsbyImageData} alt={title} />
 			</Link>
 		</Grid>
-		<Grid xs={8}>
+		<Grid item xs={8}>
 			<Link to={`/blog/${removeLeadingSlash(slug)}`}>
 				<Typography component='h2' variant='h6' sx={{ mb: 0 }}>{title}</Typography>
 				<Typography color="text.secondary">

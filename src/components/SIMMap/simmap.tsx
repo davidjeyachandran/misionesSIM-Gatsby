@@ -6,7 +6,7 @@ const SGG_Container = styled.div`
   display: inline-block;
   position: relative;
   width: 100%;
-  padding-bottom: 680px;
+  height: 480px;
   vertical-align: middle;
   overflow: hidden;
 `
