@@ -40,6 +40,41 @@ const Home = ({ location }: PageProps<GraphQLResult>) => (
       </Grid>
     </Container>
 
+    <Container maxWidth='lg'>
+      <Grid container spacing={2} sx={{ py: 6 }}>
+        <Grid item xs={12} lg={4}>
+          <Typography component='h3' variant='h4'>Sirve Con Nosotros</Typography>
+          <StaticImage
+            alt='Header image of group of people'
+            src='../assets/servir.jpg'
+            placeholder="blurred"
+            layout='fullWidth'
+          />
+        </Grid>
+
+        <Grid item xs={12} lg={4}>
+          <Typography component='h3' variant='h4'>Ora con nosotros</Typography>
+          <StaticImage
+            alt='Header image of group of people'
+            src='../assets/orar.jpg'
+            placeholder="blurred"
+            layout='fullWidth'
+          />
+        </Grid>
+
+        <Grid item xs={12} lg={4}>
+          <Typography component='h3' variant='h4'>Da a la obra</Typography>
+          <StaticImage
+            alt='Header image of group of people'
+            src='../assets/dar.jpg'
+            placeholder="blurred"
+            layout='fullWidth'
+          />
+        </Grid>
+
+      </Grid>
+    </Container>
+
     <Container maxWidth={false} sx={{ backgroundColor: '#efefef' }}>
       <Container maxWidth='lg' sx={{ pt: 4 }}>
         <Typography component='h2' variant='h3'>¿Dónde Trabajamos?</Typography>

@@ -15,7 +15,7 @@ const iconStyle = { color: '#eee' };
 
 const Footer = () => (
 	<Container maxWidth={false} sx={{ backgroundColor: 'black', py: 6 }}>
-		<Container maxWidth='xl'>
+		<Container maxWidth='lg'>
 			<Grid container sx={{ color: 'white', fontSize: '1em' }}>
 				<Grid item xs={12}><img width={100} src={logo} /></Grid>
 				<Grid item xs={12} md={6} >
