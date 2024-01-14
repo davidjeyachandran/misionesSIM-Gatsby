@@ -23,8 +23,7 @@ type GraphQLResult = {
 const RevistaTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 	const blogPosts = data.allContentfulBlogPost.nodes;
 	const post = data.contentfulRevista;
-	const { previous } = data;
-	const { next } = data;
+	const { previous, next } = data;
 	const { title } = post;
 
 	return (

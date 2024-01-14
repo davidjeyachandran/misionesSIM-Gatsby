@@ -20,7 +20,7 @@ type PreviousNextProps = {
 const PreviousNext = ({ sectionUrl, previous, next }: PreviousNextProps) => {
 
     const previousLink = previous ? `${sectionUrl}/${removeLeadingSlash(previous.slug)}` : '';
-    const nextLink = next ? `/revistavamos/${removeLeadingSlash(next.slug)}` : '';
+    const nextLink = next ? `${sectionUrl}/${removeLeadingSlash(next.slug)}` : '';
 
     if (previous || next) {
         return (

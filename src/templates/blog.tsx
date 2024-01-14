@@ -6,6 +6,7 @@ import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { Button, Container, Grid, Typography } from '@mui/material';
 import { BLOCKS, MARKS } from '../constants';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 // components
 import Hero from '../components/Hero';
@@ -17,6 +18,7 @@ import type { NextPrevious, SingleBlog } from '../types/types';
 import RevistaCard from '../components/RevistaCard';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { removeLeadingSlash } from '../utils';
+import PreviousNext from '../components/PreviousNext';
 
 const options = {
 	renderMark: {
@@ -41,8 +43,9 @@ type GraphQLResult = {
 	previous: NextPrevious;
 };
 
-const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
+const BlogTemplate = ({ pageContext, data, location }: PageProps<GraphQLResult>) => {
 	const post = data.contentfulBlogPost;
+	const { previous, next } = data;
 	const { title, body, publishDate, revista } = post;
 	const { title: titleRevista, fecha, coverImage, slug } = revista ?? {};
 	const img = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
@@ -64,8 +67,18 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 						<Typography color='#999'>{publishDate}</Typography>
 						<GatsbyImage image={post?.heroImage?.gatsbyImageData} alt={title} />
 						{body && renderRichText(body, options)}
+
+						<span><Typography variant='h5' sx={{ mt: 6 }}>Próximo Blog:</Typography>
+							{next && (
+								<Link to={`/blog/${next.slug}`} rel='next'>
+									<Button sx={{ marginLeft: "auto", mb: 6 }} variant="text" endIcon={<ArrowForwardIosIcon />}>{next.title}</Button>
+								</Link>
+							)}
+						</span>
+
 					</Grid>
 				</Grid>
+
 
 			</Container>
 		</Layout>
@@ -75,7 +88,7 @@ const BlogTemplate = ({ data, location }: PageProps<GraphQLResult>) => {
 export default BlogTemplate;
 
 export const pageQuery = graphql`
-query BlogQuery($slug: String!) {
+query BlogQuery($slug: String!, $previous: String, $next: String) {
   contentfulBlogPost(slug: { eq: $slug}) {
     id
     nid
@@ -99,6 +112,14 @@ query BlogQuery($slug: String!) {
 		}
 	}
   }
+	previous: contentfulBlogPost(slug: { eq: $previous }) {
+		slug
+		title
+	}
+	next: contentfulBlogPost(slug: { eq: $next }) {
+		slug
+		title
+	}
 }
 
 `;
