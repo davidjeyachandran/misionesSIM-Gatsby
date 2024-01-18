@@ -10,7 +10,7 @@ type RevistaListProps = {
 const RevistaList = ({ posts }: RevistaListProps) => (
 	<Grid
 		container
-		spacing={2}
+		spacing={4}
 		direction='row'
 		alignItems='center'
 		justifyContent='space-between'
@@ -19,13 +19,13 @@ const RevistaList = ({ posts }: RevistaListProps) => (
 
 			const { id, title: titleRevista, coverImage, fecha, slug } = revista;
 			return (
-				<Grid item key={id} width={275}>
+				<Grid item xs={12} md={3} key={id} sx={{ m: 0 }}>
 					<RevistaCard
 						title={titleRevista}
 						img={coverImage}
 						date={fecha}
 						slug={slug}
-						height={380}
+						height={370}
 					/>
 				</Grid>
 			);

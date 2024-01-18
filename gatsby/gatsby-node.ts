@@ -20,7 +20,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
 	const revistaTemplate = resolve('./src/templates/revista.tsx');
 	const blogTemplate = resolve('./src/templates/blog.tsx');
-	const regionTemplate = resolve('./src/templates/region.tsx'); 
+	const regionTemplate = resolve('./src/templates/region.tsx');
 
 	const result = await graphql<GraphQLResult>(
 		`
@@ -36,6 +36,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			allContentfulBlogPost(
 			  filter: {node_locale: {eq: "en-US"}}
 			  sort: {publishDate: DESC}
+			  limit: 1000
 			) {
 			  nodes {
 				title
@@ -65,6 +66,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 	const blogs = result.data.allContentfulBlogPost.nodes;
 	const regions = result.data.allContentfulRegion.nodes;
 
+	// create Revista pages
 	if (revistas.length > 0) {
 		revistas.forEach((post, index) => {
 			const previousPostSlug = index === 0 ? null : revistas[index - 1].slug;
@@ -83,6 +85,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 		});
 	}
 
+	// create Blog pages
 	if (blogs.length > 0) {
 		blogs.forEach((post, index) => {
 			const previousPostSlug = index === 0 ? null : blogs[index - 1].slug;
@@ -99,8 +102,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 				}
 			});
 		});
+
+		// create Blog list pages
+		const blogsPerPage = 10
+		const numPages = Math.ceil(blogs.length / blogsPerPage)
+		Array.from({ length: numPages }).forEach((_, i) => {
+			createPage({
+				path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+				component: resolve('./src/templates/blog-list.tsx'),
+				context: {
+					limit: blogsPerPage,
+					skip: i * blogsPerPage,
+					numPages,
+					currentPage: i + 1,
+				},
+			})
+		})
 	}
 
+	// create Region pages
 	if (regions.length > 0) {
 		regions.forEach((post, index) => {
 			const previousPostSlug = index === 0 ? null : regions[index - 1].slug;

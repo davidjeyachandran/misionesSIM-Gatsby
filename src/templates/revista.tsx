@@ -51,7 +51,7 @@ export const pageQuery = graphql`
 			fecha(formatString: "MMMM Do, YYYY")
 			rawDate: fecha
 			coverImage {
-				gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
+				gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280, aspectRatio: 0)
 				resize(height: 630, width: 1200) {
 					src
 				}

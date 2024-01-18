@@ -24,7 +24,7 @@ const styleModal = {
     bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 0,
     textAlign: 'center'
 };
 

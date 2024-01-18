@@ -32,7 +32,7 @@ const RevistaCard = ({ title, date, img, slug, height }: CardProps) => (
 	<CardCustom>
 		<Link to={`/revistavamos/${removeLeadingSlash(slug)}`}>
 			<CardMedia>
-				<GatsbyImage style={{ height }} image={img?.gatsbyImageData} alt={title} />
+				<GatsbyImage image={img?.gatsbyImageData} alt={title} />
 			</CardMedia>
 			<CardContentCustom>
 				<Typography gutterBottom variant='h6' component='div' sx={{ minHeight: 40, lineHeight: 1.2 }}>
