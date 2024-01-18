@@ -51,10 +51,7 @@ export const pageQuery = graphql`
 			fecha(formatString: "MMMM Do, YYYY")
 			rawDate: fecha
 			coverImage {
-				gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280, aspectRatio: 0)
-				resize(height: 630, width: 1200) {
-					src
-				}
+				gatsbyImageData(placeholder: BLURRED, width: 330, aspectRatio: 0.7069)
 			}
 			inDesignID
 			revistaPDF {
@@ -85,7 +82,7 @@ export const pageQuery = graphql`
 			}
 			publishDate(formatString: "MMMM Do, YYYY")
 			heroImage {
-					gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 212)
+					gatsbyImageData(placeholder: BLURRED, width: 424, height: 212)
 				}
         	}
       	}

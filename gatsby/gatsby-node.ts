@@ -28,9 +28,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			allContentfulRevista(filter: {node_locale: {eq: "en-US"}}, sort: {fecha: DESC}) {
 			  nodes {
 				id
-				title
 				slug
-				fecha(formatString: "MMMM Do, YYYY")
 			  }
 			}
 			allContentfulBlogPost(
@@ -39,13 +37,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 			  limit: 1000
 			) {
 			  nodes {
-				title
 				slug
 			  }
 			}
 			allContentfulRegion {
 			  nodes {
-				title
 				slug
 			  }
 			}
@@ -77,7 +73,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 				context: {
 					id: post.id,
 					slug: post.slug,
-					title: post.title,
 					previousPostSlug,
 					nextPostSlug
 				}
@@ -96,7 +91,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 				component: blogTemplate,
 				context: {
 					slug: post.slug,
-					title: post.title,
 					previous: previousPostSlug,
 					next: nextPostSlug
 				}
@@ -131,7 +125,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 				component: regionTemplate,
 				context: {
 					slug: post.slug,
-					title: post.title,
 					previous: previousPostSlug,
 					next: nextPostSlug
 				}

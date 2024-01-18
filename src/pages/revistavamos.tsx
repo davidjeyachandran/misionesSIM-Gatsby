@@ -88,12 +88,7 @@ export const pageQuery = graphql`
 			slug
 			fecha(formatString: "MMMM Do, YYYY")
 			coverImage {
-				gatsbyImageData(
-				layout: FULL_WIDTH
-				placeholder: BLURRED
-				width: 424
-				height: 212
-				)
+				gatsbyImageData(placeholder: BLURRED, width: 330, aspectRatio: 0.7069)
 			}
 			}
 		}

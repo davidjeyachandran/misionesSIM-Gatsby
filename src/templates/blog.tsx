@@ -68,13 +68,14 @@ const BlogTemplate = ({ pageContext, data, location }: PageProps<GraphQLResult>)
 						<GatsbyImage image={post?.heroImage?.gatsbyImageData} alt={title} />
 						{body && renderRichText(body, options)}
 
-						<span><Typography variant='h5' sx={{ mt: 6 }}>Próximo Blog:</Typography>
-							{next && (
+						{next && (
+							<>
+								<Typography variant='h5' sx={{ mt: 6 }}>Próximo Blog:</Typography>
 								<Link to={`/blog/${next.slug}`} rel='next'>
 									<Button sx={{ marginLeft: "auto", mb: 6 }} variant="text" endIcon={<ArrowForwardIosIcon />}>{next.title}</Button>
 								</Link>
-							)}
-						</span>
+							</>
+						)}
 
 					</Grid>
 				</Grid>
