@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import type { GatsbyNode } from 'gatsby';
-import { SingleBlog, SingleRegion, SingleRevista } from '../src/types/types';
+import { SingleBlog, SinglePost, SingleRegion, SingleRevista } from '../src/types/types';
 import { removeLeadingSlash } from '../src/utils';
 
 type GraphQLResult = {
@@ -13,6 +13,9 @@ type GraphQLResult = {
 	allContentfulRegion: {
 		nodes: SingleRegion[];
 	}
+	allContentfulPost: {
+		nodes: SinglePost[];
+	}
 };
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
@@ -21,6 +24,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 	const revistaTemplate = resolve('./src/templates/revista.tsx');
 	const blogTemplate = resolve('./src/templates/blog.tsx');
 	const regionTemplate = resolve('./src/templates/region.tsx');
+	const postTemplate = resolve('./src/templates/post.tsx');
 
 	const result = await graphql<GraphQLResult>(
 		`
@@ -45,6 +49,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 				slug
 			  }
 			}
+			allContentfulPost {
+				nodes {
+					id
+				  	slug
+				}
+			  }
 		  }
 		`
 	);
@@ -61,6 +71,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 	const revistas = result.data.allContentfulRevista.nodes;
 	const blogs = result.data.allContentfulBlogPost.nodes;
 	const regions = result.data.allContentfulRegion.nodes;
+	const posts = result.data.allContentfulPost.nodes;
 
 	// create Revista pages
 	if (revistas.length > 0) {
@@ -78,6 +89,23 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 				}
 			});
 		});
+
+		// create Revista list pages
+		// const revistasPerPage = 12
+		// const numPages = Math.ceil(revistas.length / revistasPerPage)
+		// Array.from({ length: numPages }).forEach((_, i) => {
+		// 	createPage({
+		// 		path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+		// 		component: resolve('./src/templates/revista-list.tsx'),
+		// 		context: {
+		// 			limit: revistasPerPage,
+		// 			skip: i * revistasPerPage,
+		// 			numPages,
+		// 			currentPage: i + 1,
+		// 		},
+		// 	})
+		// })
+
 	}
 
 	// create Blog pages
@@ -127,6 +155,21 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 					slug: post.slug,
 					previous: previousPostSlug,
 					next: nextPostSlug
+				}
+			});
+		});
+	}
+
+	// create Post pages
+	if (posts.length > 0) {
+		posts.forEach((post, index) => {
+
+			createPage({
+				path: `/${removeLeadingSlash(post.slug)}/`,
+				component: postTemplate,
+				context: {
+					id: post.id,
+					slug: post.slug,
 				}
 			});
 		});

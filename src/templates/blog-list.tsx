@@ -25,16 +25,10 @@ const BlogList: React.FC<PageProps<GraphQLResult, PageContext>> = ({ pageContext
   const posts = data.allContentfulBlogPost.nodes;
 
   const { currentPage, numPages } = pageContext
-  const isFirst = currentPage === 1
-  const isLast = currentPage === numPages
-  const prevPage = currentPage - 1 === 1 ? '/' : (currentPage - 1).toString()
-  const nextPage = (currentPage + 1).toString()
-
-  console.log('pageContext', pageContext);
 
   const handleChangePage = (event: React.MouseEvent | null, page: number) => {
     console.log(event, page);
-    navigate(page <= 1 ? '/blog' : `/blog/${page}`)
+    navigate(page === 0 ? '/blog' : `/blog/${page + 1}`)
   }
 
   return (
@@ -59,7 +53,7 @@ const BlogList: React.FC<PageProps<GraphQLResult, PageContext>> = ({ pageContext
         <TablePagination
           rowsPerPageOptions={[]} // Hides the "Rows per page" dropdown
           count={10 * numPages}
-          page={currentPage}
+          page={currentPage - 1}
           onPageChange={handleChangePage}
           rowsPerPage={10}
           style={{

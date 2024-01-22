@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PageProps } from 'gatsby';
+import { Link, type PageProps } from 'gatsby';
 import VideoWrapper from '../components/VideoWrapper'
 
 // components
@@ -43,33 +43,39 @@ const Home = ({ location }: PageProps<GraphQLResult>) => (
     <Container maxWidth='lg'>
       <Grid container spacing={2} sx={{ py: 6 }}>
         <Grid item xs={12} lg={4}>
-          <Typography component='h3' variant='h4'>Sirve Con Nosotros</Typography>
-          <StaticImage
-            alt='Header image of group of people'
-            src='../assets/servir.jpg'
-            placeholder="blurred"
-            layout='fullWidth'
-          />
+          <Link to='/sirve-con-nosotros'>
+            <Typography component='h3' variant='h4'>Sirve Con Nosotros</Typography>
+            <StaticImage
+              alt='Header image of group of people'
+              src='../assets/servir.jpg'
+              placeholder="blurred"
+              layout='fullWidth'
+            />
+          </Link>
         </Grid>
 
         <Grid item xs={12} lg={4}>
-          <Typography component='h3' variant='h4'>Ora con nosotros</Typography>
-          <StaticImage
-            alt='Header image of group of people'
-            src='../assets/orar.jpg'
-            placeholder="blurred"
-            layout='fullWidth'
-          />
+          <Link to='/sirve-con-nosotros'>
+            <Typography component='h3' variant='h4'>Ora con nosotros</Typography>
+            <StaticImage
+              alt='Header image of group of people'
+              src='../assets/orar.jpg'
+              placeholder="blurred"
+              layout='fullWidth'
+            />
+          </Link>
         </Grid>
 
         <Grid item xs={12} lg={4}>
-          <Typography component='h3' variant='h4'>Da a la obra</Typography>
-          <StaticImage
-            alt='Header image of group of people'
-            src='../assets/dar.jpg'
-            placeholder="blurred"
-            layout='fullWidth'
-          />
+          <Link to='/da-la-obra'>
+            <Typography component='h3' variant='h4'>Da a la obra</Typography>
+            <StaticImage
+              alt='Header image of group of people'
+              src='../assets/dar.jpg'
+              placeholder="blurred"
+              layout='fullWidth'
+            />
+          </Link>
         </Grid>
 
       </Grid>

@@ -64,3 +64,16 @@ export type SingleRegion = {
 		};
 	};
 };
+
+export type SinglePost = {
+	id: string;
+	slug: string;
+	title: string;
+	body: RenderRichTextData<ContentfulRichTextGatsbyReference>;
+	heroImage: {
+		gatsbyImageData: IGatsbyImageData;
+		resize: {
+			src: string;
+		};
+	};
+};
