@@ -1,5 +1,5 @@
-import { Link } from 'gatsby';
 import styled from 'styled-components';
+import { StaticImage } from 'gatsby-plugin-image';
 
 export const videoRatio = styled.div`
     overflow: hidden;
@@ -7,8 +7,8 @@ export const videoRatio = styled.div`
     position: relative;
     width: 100%;
   `
-  
-  export const VideoInner = styled.div`
+
+export const VideoInner = styled.div`
     bottom: 0;
     height: 100%;
     left: 0;
@@ -18,16 +18,8 @@ export const videoRatio = styled.div`
     top: 0;
     width: 100%;
 `
- 
+
 export const ThumbnailImage = styled.img`
     width: 100%;
 `;
 
-export const PlayIcon = styled.img`
-    height: 42px;
-    left: calc(50% - 30px);
-    position: absolute;
-    top: calc(50% - 21px);
-    transition: all 0.3s ease-in-out;
-    width: 60px;
-`;

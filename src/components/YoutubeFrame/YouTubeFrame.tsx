@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
-import { PlayIcon, ThumbnailImage, VideoInner } from "./styles";
+import { ThumbnailImage, VideoInner } from "./styles";
 import VideoWrapper from "../VideoWrapper";
+import { StaticImage } from "gatsby-plugin-image";
 
 type Props = {
     title: string;
@@ -33,6 +34,7 @@ export default function YouTubeFrame({ title, video, width, height, thumbnailQua
     return (
         <VideoWrapper>
             <div ref={divRef} className="youtube-frame position-relative">
+
                 <button
                     className='thumbnailButton'
                     onClick={onClick}
@@ -43,11 +45,19 @@ export default function YouTubeFrame({ title, video, width, height, thumbnailQua
                             src={thumbnailImage}
                             loading="lazy"
                         />
-                        <PlayIcon
+                        <StaticImage
                             alt="Play Video"
-                            src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_play_button_icon_%282013%E2%80%932017%29.svg"
+                            src="./youtube_play_button.svg"
                             loading="lazy"
                             className='playIcon'
+                            style={{
+                                height: '42px',
+                                left: 'calc(50% - 30px)',
+                                position: 'absolute',
+                                top: 'calc(50% - 21px)',
+                                transition: 'all 0.3s ease-in-out',
+                                width: '60px'
+                            }}
                         />
                     </VideoInner>
                 </button>
