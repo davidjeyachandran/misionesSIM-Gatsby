@@ -1,12 +1,11 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faFacebook,
 	faInstagram,
 	faYoutube,
-	faLinkedin,
 	faWhatsapp,
 } from '@fortawesome/free-brands-svg-icons'
 
@@ -17,7 +16,7 @@ const Footer = () => (
 	<Container maxWidth={false} sx={{ backgroundColor: 'black', py: 6 }}>
 		<Container maxWidth='lg'>
 			<Grid container sx={{ color: 'white', fontSize: '1em' }}>
-				<Grid item xs={12}><img width={100} src={logo} /></Grid>
+				<Grid item xs={12}><img alt='SIM Logo' width={100} src={logo} /></Grid>
 				<Grid item xs={12} md={6} >
 					<p>Cruzamos barreras para proclamar al Cristo crucificado y resucitado, expresando Su amor y compasión entre aquellos que viven y mueren sin Él.</p>
 					<p>Hacemos discípulos que confían y obedecen a Jesús, y llegan a integrarse a iglesias Cristo céntricas.</p>

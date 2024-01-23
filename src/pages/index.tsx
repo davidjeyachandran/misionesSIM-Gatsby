@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, type PageProps } from 'gatsby';
-import VideoWrapper from '../components/VideoWrapper'
 
 // components
 import { Container, Grid, Typography } from '@mui/material';
