@@ -54,7 +54,7 @@ const Home = ({ location }: PageProps<GraphQLResult>) => (
         </Grid>
 
         <Grid item xs={12} lg={4}>
-          <Link to='/sirve-con-nosotros'>
+          <Link to='/ora-con-nosotros'>
             <Typography component='h3' variant='h4'>Ora con nosotros</Typography>
             <StaticImage
               alt='Header image of group of people'
@@ -85,11 +85,11 @@ const Home = ({ location }: PageProps<GraphQLResult>) => (
         <Typography component='h2' variant='h3'>¿Dónde Trabajamos?</Typography>
 
         <Grid container spacing={2} sx={{ backgroundColor: '#efefef' }}>
-          <Grid item xs={12} lg={8}>
+          <Grid item xs={12} lg={9}>
             <SIMMap />
           </Grid>
 
-          <Grid item xs={12} lg={4}>
+          <Grid item xs={12} lg={3}>
             <Grid container spacing={2} sx={{ color: 'primary.main' }}>
 
               <Grid item xs={12} lg={6}>

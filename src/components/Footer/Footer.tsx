@@ -26,13 +26,16 @@ const Footer = () => (
 				<Grid item xs={12} md={6} textAlign='right'>
 					<Box display="flex" width='100%' justifyContent="flex-end" sx={{ pt: 2 }}>
 						<Box display="flex" width="240px" justifyContent="space-between">
-							<a href="https://www.facebook.com/SIMLatinoamerica/" target="_blank" style={iconStyle}>
+							<a href="https://www.facebook.com/SIMLatinoamerica/" aria-label="Facebook page"
+								target="_blank" style={iconStyle}>
 								<FontAwesomeIcon icon={faFacebook} size="2x" />
 							</a>
-							<a href="https://www.instagram.com/simlatinoamerica/" target="_blank" style={iconStyle}>
+							<a href="https://www.instagram.com/simlatinoamerica/" aria-label="Instagram page"
+								target="_blank" style={iconStyle}>
 								<FontAwesomeIcon icon={faInstagram} size="2x" />
 							</a>
-							<a href="https://www.youtube.com/user/VamosSIM" target="_blank" style={iconStyle}>
+							<a href="https://www.youtube.com/user/VamosSIM" aria-label="Youtube channel"
+								target="_blank" style={iconStyle}>
 								<FontAwesomeIcon icon={faYoutube} size="2x" />
 							</a>
 							<FontAwesomeIcon icon={faWhatsapp} size="2x" />
