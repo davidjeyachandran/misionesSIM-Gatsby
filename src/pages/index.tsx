@@ -34,7 +34,7 @@ const Home = ({ location }: PageProps<GraphQLResult>) => (
         </Grid>
 
         <Grid item xs={12} lg={6}>
-          <YouTubeFrame title='Qué es SIM' video='YIIw-r8ZYAY' width={'500'} height='320' thumbnailQuality={'mqdefault'} />
+          <YouTubeFrame title='Qué es SIM' video='YIIw-r8ZYAY' width={'500'} height='320' thumbnailQuality={'hqdefault'} />
         </Grid>
       </Grid>
     </Container>
