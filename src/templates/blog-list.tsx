@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, graphql, navigate } from 'gatsby';
 import type { PageProps } from 'gatsby';
-import { Container, Grid, TablePagination } from '@mui/material';
+import { Container, Grid, TablePagination, Typography } from '@mui/material';
 import { get } from 'lodash-es';
 import Layout from '../components/Layout';
 
@@ -11,7 +11,8 @@ import BlogCard from '../components/BlogCard';
 type PageContext = {
   currentPage: number;
   numPages: number;
-  // Add other properties if present in your actual pageContext
+  limit: number;
+  skip: number;
 };
 
 type GraphQLResult = {
@@ -26,24 +27,33 @@ const BlogList: React.FC<PageProps<GraphQLResult, PageContext>> = ({ pageContext
 
   const { currentPage, numPages } = pageContext
 
-  const handleChangePage = (event: React.MouseEvent | null, page: number) => {
-    console.log(event, page);
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    page: number
+  ) => {
     navigate(page === 0 ? '/blog' : `/blog/${page + 1}`)
   }
 
   return (
     <Layout location={location}>
       <Container maxWidth='lg'>
-        <h1>Blogs</h1>
+        <Typography
+          component="h1"
+          variant="h2"
+          sx={{ mb: 4, mt: 2 }}
+        >
+          Blogs
+        </Typography>
         <Grid container>
           {posts.map((blog) => {
             const description = get(blog, 'description.description', '')
-            const slug = get(blog, 'slug');
+            const slug = get(blog, 'slug', '');
+            const title = get(blog, 'title', '');
             return <BlogCard
               key={slug}
-              title={blog?.title}
+              title={title}
               date={blog.publishDate}
-              img={blog?.heroImage}
+              img={blog.heroImage}
               slug={slug}
               description={description}
             />;
@@ -51,13 +61,15 @@ const BlogList: React.FC<PageProps<GraphQLResult, PageContext>> = ({ pageContext
 
         </Grid>
         <TablePagination
-          rowsPerPageOptions={[]} // Hides the "Rows per page" dropdown
+          rowsPerPageOptions={[]}
           count={10 * numPages}
           page={currentPage - 1}
           onPageChange={handleChangePage}
           rowsPerPage={10}
-          style={{
-            borderTop: `1px solid red`, marginTop: 200, marginBottom: 30
+          sx={{
+            borderTop: (theme) => `1px solid ${theme.palette.divider}`,
+            mt: 25,
+            mb: 3.75
           }}
           showFirstButton
           showLastButton
