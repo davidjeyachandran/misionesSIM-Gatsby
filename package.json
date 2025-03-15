@@ -4,6 +4,7 @@
 	"private": true,
 	"version": "0.0.1",
 	"author": "Contentful <opensource@contentful.com>",
+	"packageManager": "yarn@4.1.0",
 	"bugs": {
 		"url": "https://github.com/contentful/starter-gatsby-blog/issues"
 	},
