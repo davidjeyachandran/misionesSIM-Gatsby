@@ -3,7 +3,7 @@ import { Link, graphql } from 'gatsby';
 import type { PageProps } from 'gatsby';
 import { get } from 'lodash-es';
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { Button, Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography, Paper, Stack, Alert, Box } from '@mui/material';
 import { BLOCKS, MARKS } from '../constants';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -12,6 +12,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Hero from '../components/Hero';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
+import MultipleChoice from '../components/MultipleChoice';
 
 // types
 import type { NextPrevious, SingleBlog } from '../types/types';
@@ -43,12 +44,27 @@ type GraphQLResult = {
 	previous: NextPrevious;
 };
 
+type MultipleChoice = {
+	question: string;
+	options: string[];
+	correct_answer_index: number;
+}
+
 const BlogTemplate = ({ pageContext, data, location }: PageProps<GraphQLResult>) => {
 	const post = data.contentfulBlogPost;
 	const { previous, next } = data;
-	const { title, body, publishDate, revista } = post;
+	const { title, body, publishDate, revista, multipleChoice } = post;
 	const { title: titleRevista, fecha, coverImage, slug } = revista ?? {};
 	const img = get(post, 'heroImage.gatsbyImageData.images.sources[0].srcSet');
+	const [selectedAnswer, setSelectedAnswer] = React.useState<number | null>(null);
+
+	const handleAnswerClick = (index: number) => {
+		setSelectedAnswer(index);
+	};
+
+	const isCorrectAnswer = (index: number) => {
+		return multipleChoice && index === multipleChoice.correct_answer_index;
+	};
 
 	return (
 		<Layout location={location}>
@@ -68,13 +84,14 @@ const BlogTemplate = ({ pageContext, data, location }: PageProps<GraphQLResult>)
 						<GatsbyImage image={post?.heroImage?.gatsbyImageData} alt={title} />
 						{body && renderRichText(body, options)}
 
-						{next && (
-							<>
-								<Typography variant='h5' sx={{ mt: 6 }}>Próximo Blog:</Typography>
-								<Link to={`/blog/${next.slug}`} rel='next'>
-									<Button sx={{ marginLeft: "auto", mb: 6 }} variant="text" endIcon={<ArrowForwardIosIcon />}>{next.title}</Button>
-								</Link>
-							</>
+						<hr />
+						{multipleChoice && (
+							<MultipleChoice
+								question={multipleChoice.question}
+								options={multipleChoice.options}
+								correct_answer_index={multipleChoice.correct_answer_index}
+								nextBlog={next}
+							/>
 						)}
 
 					</Grid>
@@ -100,6 +117,11 @@ query BlogQuery($slug: String!, $previous: String, $next: String) {
     body {
       raw
     }
+	multipleChoice {
+		question
+		options
+		correct_answer_index
+	}
 	heroImage {
 		gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 424, height: 300)
 	}
