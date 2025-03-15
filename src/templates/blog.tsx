@@ -12,6 +12,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Hero from '../components/Hero';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
+import MultipleChoice from '../components/MultipleChoice';
 
 // types
 import type { NextPrevious, SingleBlog } from '../types/types';
@@ -85,85 +86,12 @@ const BlogTemplate = ({ pageContext, data, location }: PageProps<GraphQLResult>)
 
 						<hr />
 						{multipleChoice && (
-							<Box sx={{ mt: 4 }}>
-								<Typography variant="h6" gutterBottom>
-									{multipleChoice.question}
-								</Typography>
-
-								{selectedAnswer === null ? (
-									<Stack spacing={2} sx={{ mt: 2 }}>
-										{multipleChoice.options.map((option: string, index: number) => (
-											<Button
-												key={index}
-												variant="outlined"
-												fullWidth
-												onClick={() => handleAnswerClick(index)}
-												sx={{
-													justifyContent: 'flex-start',
-													textAlign: 'left',
-													p: 1.5,
-													borderColor: 'secondary.main',
-													backgroundColor: 'secondary.main',
-													color: 'secondary.contrastText',
-													'&:hover': {
-														backgroundColor: '#444',
-														borderColor: 'secondary.main'
-													}
-												}}
-											>
-												{option}
-											</Button>
-										))}
-									</Stack>
-								) : (
-									<Stack spacing={2} sx={{ mt: 2 }}>
-										<Alert
-											severity={isCorrectAnswer(selectedAnswer) ? "success" : "error"}
-											sx={{ mb: 2 }}
-										>
-											{isCorrectAnswer(selectedAnswer)
-												? "¡Correcto!"
-												: "Incorrecto"}
-										</Alert>
-										{isCorrectAnswer(selectedAnswer) && (
-											<>
-												<Typography
-													variant="body1"
-													sx={{
-														color: 'success.dark',
-														fontStyle: 'italic'
-													}}
-												>
-													{multipleChoice.options[multipleChoice.correct_answer_index]}
-												</Typography>
-												{next && (
-													<Link to={`/blog/${next.slug}`} rel='next'>
-														<Button
-															variant="outlined"
-															sx={{
-																marginLeft: "auto",
-																mt: 2
-															}}
-															endIcon={<ArrowForwardIosIcon />}
-														>
-															Próximo Blog: {next.title}
-														</Button>
-													</Link>
-												)}
-											</>
-										)}
-										{!isCorrectAnswer(selectedAnswer) && (
-											<Button
-												variant="text"
-												onClick={() => setSelectedAnswer(null)}
-												sx={{ mt: 2 }}
-											>
-												Intentar de nuevo
-											</Button>
-										)}
-									</Stack>
-								)}
-							</Box>
+							<MultipleChoice
+								question={multipleChoice.question}
+								options={multipleChoice.options}
+								correct_answer_index={multipleChoice.correct_answer_index}
+								nextBlog={next}
+							/>
 						)}
 
 					</Grid>
