@@ -17,6 +17,11 @@ export type SingleBlog = {
 	slug: string;
 	title: string;
 	revista: SingleRevista;
+	multipleChoice?: {
+		question: string;
+		options: string[];
+		correct_answer_index: number;
+	};
 };
 
 export type SingleRevista = {
