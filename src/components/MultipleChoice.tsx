@@ -99,7 +99,6 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
                                 variant="h6"
                                 color="success.main"
                                 sx={{
-                                    textAlign: 'center',
                                     fontWeight: 'bold',
                                     mb: 2
                                 }}
@@ -109,10 +108,13 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
                             {nextBlog && (
                                 <Link to={`/blog/${nextBlog.slug}`} rel='next'>
                                     <Button
-                                        variant="outlined"
+                                        variant="contained"
                                         sx={{
                                             marginLeft: "auto",
-                                            mt: 2
+                                            fontSize: '1em',
+                                            py: 2,
+                                            my: 4,
+                                            textTransform: 'none'
                                         }}
                                         endIcon={<ArrowForwardIosIcon />}
                                     >

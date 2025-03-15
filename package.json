@@ -7,8 +7,8 @@
 	"bugs": {
 		"url": "https://github.com/contentful/starter-gatsby-blog/issues"
 	},
-	"packageManager": "yarn@3.2.4",
 	"dependencies": {
+		"@babel/core": "^7.23.0",
 		"@contentful/rich-text-react-renderer": "^15.12.1",
 		"@emotion/react": "^11.10.0",
 		"@emotion/styled": "^11.10.0",
@@ -29,6 +29,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.12.0",
 		"@typescript-eslint/parser": "^5.12.0",
 		"babel-plugin-styled-components": "^2.0.3",
+		"babel-eslint": "^10.1.0",
 		"concurrently": "^7.0.0",
 		"dotenv": "^16.0.0",
 		"gatsby": "^5.12.4",
@@ -48,6 +49,7 @@
 		"react-dom": "^18.2.0",
 		"react-helmet": "^6.1.0",
 		"react-is": "^18.2.0",
+		"sharp": "^0.32.6",
 		"styled-components": "^5.3.3",
 		"ts-node": "^10.5.0",
 		"typescript": "^4.5.5"
@@ -82,8 +84,8 @@
 		"start": "gatsby develop",
 		"dev-gatsby": "gatsby develop",
 		"dev-typescript": "tsc -w",
-		"dev": "npm run clean && concurrently \"npm:dev-gatsby\" \"npm:dev-typescript\"",
+		"dev": "yarn clean && concurrently \"yarn dev-gatsby\" \"yarn dev-typescript\"",
 		"serve": "gatsby serve",
-		"troubleshoot": "rm -rf .cache node_modules public package-lock.json && npm i && npm run dev"
+		"troubleshoot": "rm -rf .cache node_modules public yarn.lock && yarn install && yarn dev"
 	}
 }
