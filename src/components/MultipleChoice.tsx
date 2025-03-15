@@ -34,6 +34,12 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
             borderColor: 'secondary.main',
             backgroundColor: 'secondary.main',
             color: 'secondary.contrastText',
+            borderRadius: '24px',
+            py: 1,
+            px: 2.5,
+            minHeight: '48px',
+            fontSize: '0.95rem',
+            textTransform: 'none',
             '&:hover': {
                 backgroundColor: '#444',
                 borderColor: 'secondary.main'
@@ -65,7 +71,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
                 {question}
             </Typography>
 
-            <Stack spacing={2} sx={{ mt: 2 }}>
+            <Stack spacing={1.5} sx={{ mt: 2 }}>
                 {options.map((option: string, index: number) => (
                     <Button
                         key={index}
@@ -76,7 +82,6 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
                         sx={{
                             justifyContent: 'flex-start',
                             textAlign: 'left',
-                            p: 1.5,
                             ...getButtonStyle(index)
                         }}
                     >
