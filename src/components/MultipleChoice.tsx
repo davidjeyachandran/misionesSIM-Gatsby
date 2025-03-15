@@ -45,8 +45,9 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
                 borderColor: 'secondary.main'
             },
             '&.Mui-disabled': {
-                color: 'secondary.contrastText',
-                backgroundColor: 'secondary.main'
+                color: 'rgba(255, 255, 255, 0.5)',
+                backgroundColor: 'secondary.main',
+                opacity: 0.7
             }
         };
 
@@ -123,11 +124,11 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
                     )}
                     {!isCorrectAnswer(selectedAnswer) && (
                         <Button
-                            variant="text"
+                            variant="outlined"
                             onClick={() => setSelectedAnswer(null)}
                             sx={{ mt: 2 }}
                         >
-                            Intentar de nuevo
+                            Intenta de nuevo
                         </Button>
                     )}
                 </Stack>
