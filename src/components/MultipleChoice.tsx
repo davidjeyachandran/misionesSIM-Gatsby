@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { Button, Typography, Stack, Alert, Box } from '@mui/material';
+import { Button, Typography, Stack, Box, Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 type MultipleChoiceProps = {
@@ -21,122 +21,116 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
 }) => {
     const [selectedAnswer, setSelectedAnswer] = React.useState<number | null>(null);
 
-    const handleAnswerClick = (index: number) => {
-        setSelectedAnswer(index);
+    const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedAnswer(parseInt(event.target.value, 10));
     };
 
     const isCorrectAnswer = (index: number) => {
         return index === correct_answer_index;
     };
 
-    const getButtonStyle = (index: number) => {
-        const defaultStyle = {
-            borderColor: 'secondary.main',
-            backgroundColor: 'secondary.main',
-            color: 'secondary.contrastText',
-            borderRadius: '24px',
-            py: 1,
-            px: 2.5,
-            minHeight: '48px',
-            fontSize: '0.95rem',
-            textTransform: 'none',
-            '&:hover': {
-                backgroundColor: '#444',
-                borderColor: 'secondary.main'
-            },
-            '&.Mui-disabled': {
-                color: 'rgba(255, 255, 255, 0.5)',
-                backgroundColor: 'secondary.main',
-                opacity: 0.7
-            }
-        };
+    const getOptionStyle = (index: number) => {
+        if (selectedAnswer === null) return {};
 
         if (index === selectedAnswer) {
             return {
-                ...defaultStyle,
-                borderColor: isCorrectAnswer(index) ? 'success.main' : 'error.main',
-                backgroundColor: isCorrectAnswer(index) ? 'success.main' : 'error.main',
-                '&:hover': {
-                    backgroundColor: isCorrectAnswer(index) ? 'success.dark' : 'error.dark',
-                    borderColor: isCorrectAnswer(index) ? 'success.main' : 'error.main'
+                color: isCorrectAnswer(index) ? 'success.main' : 'error.main',
+                '& .MuiFormControlLabel-label': {
+                    color: isCorrectAnswer(index) ? 'success.main' : 'error.main',
+                    fontWeight: 'bold'
+                },
+                '&.Mui-checked': {
+                    color: isCorrectAnswer(index) ? 'success.main' : 'error.main',
+                },
+                '& .MuiSvgIcon-root': {
+                    color: isCorrectAnswer(index) ? 'success.main' : 'error.main',
                 }
             };
         }
-
-        return defaultStyle;
+        return {};
     };
 
     return (
         <Box sx={{ my: 4 }}>
+            <Typography variant="h5" gutterBottom>
+                Responde la pregunta:
+            </Typography>
             <Typography variant="h6" gutterBottom>
                 {question}
             </Typography>
 
-            <Stack spacing={1.5} sx={{ mt: 2 }}>
-                {options.map((option: string, index: number) => (
-                    <Button
-                        key={index}
-                        variant="outlined"
-                        fullWidth
-                        onClick={() => handleAnswerClick(index)}
-                        disabled={selectedAnswer !== null && selectedAnswer !== index}
-                        sx={{
-                            justifyContent: 'flex-start',
-                            textAlign: 'left',
-                            ...getButtonStyle(index)
-                        }}
-                    >
-                        {option}
-                    </Button>
-                ))}
-            </Stack>
-
-            {selectedAnswer !== null && (
-                <Stack spacing={2} sx={{ mt: 2 }}>
-                    {isCorrectAnswer(selectedAnswer) && (
-                        <>
-                            <Typography
-                                variant="h6"
-                                color="success.main"
+            <FormControl component="fieldset" sx={{ width: '100%', mt: 2 }}>
+                <RadioGroup value={selectedAnswer === null ? '' : selectedAnswer} onChange={handleAnswerChange}>
+                    <Stack spacing={1.5}>
+                        {options.map((option: string, index: number) => (
+                            <FormControlLabel
+                                key={index}
+                                value={index}
+                                control={
+                                    <Radio
+                                        sx={getOptionStyle(index)}
+                                        disabled={selectedAnswer !== null && selectedAnswer !== index}
+                                    />
+                                }
+                                label={option}
                                 sx={{
-                                    fontWeight: 'bold',
-                                    mb: 2
+                                    '&.Mui-disabled': {
+                                        opacity: 0.7,
+                                    }
                                 }}
+                            />
+                        ))}
+                    </Stack>
+                </RadioGroup>
+            </FormControl>
+
+            <Box sx={{ height: '160px', mt: 2 }}>
+                {selectedAnswer !== null && (
+                    <Stack spacing={2}>
+                        {isCorrectAnswer(selectedAnswer) ? (
+                            <>
+                                <Typography
+                                    variant="h6"
+                                    color="success.main"
+                                    sx={{
+                                        fontWeight: 'bold',
+                                        mb: 2,
+                                        minHeight: '32px'
+                                    }}
+                                >
+                                    ¡Correcto! ¡Bien hecho!
+                                </Typography>
+                                {nextBlog && (
+                                    <Link to={`/blog/${nextBlog.slug}`} rel='next'>
+                                        <Button
+                                            variant="contained"
+                                            sx={{
+                                                marginLeft: "auto",
+                                                fontSize: '1em',
+                                                py: 2,
+                                                textTransform: 'none'
+                                            }}
+                                            endIcon={<ArrowForwardIosIcon />}
+                                        >
+                                            Próximo Blog: {nextBlog.title}
+                                        </Button>
+                                    </Link>
+                                )}
+                            </>
+                        ) : (
+                            <Button
+                                variant="outlined"
+                                onClick={() => setSelectedAnswer(null)}
+                                sx={{ mt: 2 }}
                             >
-                                ¡Correcto! ¡Bien hecho!
-                            </Typography>
-                            {nextBlog && (
-                                <Link to={`/blog/${nextBlog.slug}`} rel='next'>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            marginLeft: "auto",
-                                            fontSize: '1em',
-                                            py: 2,
-                                            my: 4,
-                                            textTransform: 'none'
-                                        }}
-                                        endIcon={<ArrowForwardIosIcon />}
-                                    >
-                                        Próximo Blog: {nextBlog.title}
-                                    </Button>
-                                </Link>
-                            )}
-                        </>
-                    )}
-                    {!isCorrectAnswer(selectedAnswer) && (
-                        <Button
-                            variant="outlined"
-                            onClick={() => setSelectedAnswer(null)}
-                            sx={{ mt: 2 }}
-                        >
-                            Intenta de nuevo
-                        </Button>
-                    )}
-                </Stack>
-            )}
+                                Intenta de nuevo
+                            </Button>
+                        )}
+                    </Stack>
+                )}
+            </Box>
         </Box>
     );
 };
 
-export default MultipleChoice; 
+export default MultipleChoice;
